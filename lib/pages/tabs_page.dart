@@ -13,10 +13,10 @@ class HomePage extends StatelessWidget {
   static const String id = '/tabs';
   HomePage({Key? key}) : super(key: key);
 
-  final List<Map<String, dynamic>> _pageDetails = [
-    {'page': const PendingPage(), 'title': 'Pending Tasks'},
-    {'page': const CompletedPage(), 'title': 'Completed Tasks'},
-    {'page': const FavoritePage(), 'title': 'Favorite Tasks'},
+  final List<String> _pageTitles = [
+    'Pending Tasks',
+    'Completed Tasks',
+    'Favorite Tasks',
   ];
 
   int _selectedPageIndex = 0;
@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              _pageDetails[_selectedPageIndex]['title'],
+              _pageTitles[_selectedPageIndex],
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
             child: const Icon(Icons.add, size: 30),
           ),
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: 0,
+            currentIndex: _selectedPageIndex,
             backgroundColor: ColorService.main,
             selectedItemColor: ColorService.white,
             unselectedItemColor: ColorService.grey,
