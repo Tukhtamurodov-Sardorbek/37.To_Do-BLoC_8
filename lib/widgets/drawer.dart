@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/pages/home_page.dart';
 import 'package:todo_app/pages/recycle_bin.dart';
+import 'package:todo_app/services/color_service.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -34,8 +35,21 @@ class CustomDrawer extends StatelessWidget {
                     Icons.folder_special,
                     color: Colors.deepPurpleAccent.shade700,
                   ),
-                  title: const Text('Home'),
-                  trailing: Text('${state.todoList.length}'),
+                  title: const Text(
+                    'Home',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: Text(
+                    '${state.todoList.length}',
+                    style: TextStyle(
+                      color: ColorService.main,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
                   onTap: () => Navigator.pushNamed(context, HomePage.id),
                 );
               },
@@ -48,12 +62,26 @@ class CustomDrawer extends StatelessWidget {
                     Icons.delete,
                     color: Colors.deepPurpleAccent.shade700,
                   ),
-                  title: const Text('Bin'),
-                  trailing: Text('${state.deletedList.length}'),
+                  title: const Text(
+                    'Bin',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: Text(
+                    '${state.deletedList.length}',
+                    style: TextStyle(
+                      color: ColorService.main,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
                   onTap: () => Navigator.pushNamed(context, RecycleBin.id),
                 );
-              }
+              },
             ),
+            Divider(color: Colors.deepPurpleAccent.shade700),
           ],
         ),
       ),
