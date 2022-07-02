@@ -7,29 +7,38 @@ class ToDoEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AddToDo extends ToDoEvent{
+class AddToDo extends ToDoEvent {
   final ToDo todo;
   const AddToDo({
     required this.todo,
-});
+  });
   @override
   List<Object> get props => [todo];
 }
 
-class UpdateToDo extends ToDoEvent{
+class UpdateToDo extends ToDoEvent {
   final ToDo todo;
   const UpdateToDo({
     required this.todo,
-});
+  });
   @override
   List<Object> get props => [todo];
 }
 
-class DeleteToDo extends ToDoEvent{
+class DeleteToDo extends ToDoEvent {
   final ToDo todo;
   const DeleteToDo({
     required this.todo,
-});
+  });
+  @override
+  List<Object> get props => [todo];
+}
+
+class RemoveToDo extends ToDoEvent {
+  final ToDo todo;
+  const RemoveToDo({
+    required this.todo,
+  });
   @override
   List<Object> get props => [todo];
 }
