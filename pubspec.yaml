@@ -17,6 +17,9 @@ dependencies:
   # For State Management
   flutter_bloc: ^8.0.1
 
+  # To store state
+  hydrated_bloc: ^8.1.0
+
   equatable: ^2.0.3
 
 dev_dependencies:
