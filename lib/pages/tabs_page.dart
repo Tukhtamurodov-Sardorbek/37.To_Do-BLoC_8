@@ -9,15 +9,20 @@ import 'package:todo_app/widgets/bottomSheet.dart';
 import 'package:todo_app/widgets/drawer.dart';
 import 'package:todo_app/widgets/todo_list.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const String id = '/tabs';
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
-  final List<String> _pageTitles = [
-    'Pending Tasks',
-    'Completed Tasks',
-    'Favorite Tasks',
-  ];
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final Map<String, Widget> _pages = {
+    'Pending Tasks' : const PendingPage(),
+    'Completed Tasks' : const CompletedPage(),
+    'Favorite Tasks' : const FavoritePage(),
+  };
 
   int _selectedPageIndex = 0;
 
@@ -38,18 +43,11 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              _pageTitles[_selectedPageIndex],
+              _pages.keys.toList()[_selectedPageIndex],
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-          body: PageView(
-            physics: const NeverScrollableScrollPhysics(),
-            children: const [
-              PendingPage(),
-              CompletedPage(),
-              FavoritePage(),
-            ],
-          ),
+          body: _pages.values.toList()[_selectedPageIndex],
           floatingActionButton: FloatingActionButton(
             onPressed: () => _addToDo(context),
             tooltip: 'Add ToDo',
@@ -68,7 +66,11 @@ class HomePage extends StatelessWidget {
               fontWeight: FontWeight.normal,
               fontSize: 12,
             ),
-            onTap: (index) {},
+            onTap: (index) {
+              setState((){
+                _selectedPageIndex = index;
+              });
+            },
             items: const [
               BottomNavigationBarItem(
                   icon: Padding(
