@@ -1,11 +1,10 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
+import '../bloc_exports.dart';
 import '../../models/todo_model.dart';
 
 part 'todo_event.dart';
 part 'todo_state.dart';
 
-class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
+class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
   ToDoBloc() : super(const ToDoState()) {
     on<AddToDo>(_addToDo);
     on<UpdateToDo>(_updateToDo);
@@ -38,4 +37,10 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
     final state = this.state;
     emit(ToDoState(todoList: List.from(state.todoList)..remove(event.todo)));
   }
+
+  @override
+  ToDoState? fromJson(Map<String, dynamic> json) => ToDoState.fromMap(json);
+
+  @override
+  Map<String, dynamic>? toJson(ToDoState state) => state.toMap();
 }
