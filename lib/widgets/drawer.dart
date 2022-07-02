@@ -52,7 +52,7 @@ class CustomDrawer extends StatelessWidget {
                       color: ColorService.grey,
                     ),
                     child: Text(
-                      state.todoList.length >= 999
+                      state.todoList.length <= 999
                           ? '${state.todoList.length}'
                           : '999+',
                       style: TextStyle(
@@ -82,12 +82,24 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  trailing: Text(
-                    '${state.deletedList.length}',
-                    style: TextStyle(
-                      color: ColorService.main,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                  trailing: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14.0,
+                      vertical: 8.0,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: ColorService.grey,
+                    ),
+                    child: Text(
+                      state.deletedList.length <= 999
+                          ? '${state.deletedList.length}'
+                          : '999+',
+                      style: TextStyle(
+                        color: ColorService.main,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   onTap: () =>
