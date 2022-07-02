@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/models/todo_model.dart';
+import 'package:todo_app/services/color_service.dart';
 import 'package:todo_app/widgets/drawer.dart';
 import 'package:todo_app/widgets/todo_list.dart';
 
@@ -16,8 +17,8 @@ class RecycleBin extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.deepPurpleAccent.shade700,
+            foregroundColor: ColorService.white,
+            backgroundColor: ColorService.main,
             title: const Text(
               'Recycle Bin',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
