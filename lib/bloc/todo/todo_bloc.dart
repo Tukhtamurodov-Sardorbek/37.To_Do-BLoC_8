@@ -16,6 +16,7 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     on<AddToDo>(_addToDo);
     on<UpdateToDo>(_updateToDo);
     on<DeleteToDo>(_deleteToDo);
+    on<RemoveToDo>(_removeToDo);
   }
 
   void _addToDo(AddToDo event, Emitter<ToDoState> emit) {
@@ -41,6 +42,11 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
   }
 
   void _deleteToDo(DeleteToDo event, Emitter<ToDoState> emit) {
+    final state = this.state;
+    emit(ToDoState(todoList: List.from(state.todoList)..remove(event.todo)));
+  }
+
+  void _removeToDo(RemoveToDo event, Emitter<ToDoState> emit) {
     final state = this.state;
     emit(ToDoState(todoList: List.from(state.todoList)..remove(event.todo)));
   }
