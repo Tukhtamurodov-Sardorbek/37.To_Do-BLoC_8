@@ -6,7 +6,7 @@ class ToDoList extends StatelessWidget {
   final List<ToDo> list;
   const ToDoList({Key? key, required this.list}) : super(key: key);
 
-  void _removeOrDelete(BuildContext context, ToDo todo){
+  void _removeOrDelete(BuildContext context, ToDo todo) {
     todo.isDeleted
         ? context.read<ToDoBloc>().add(DeleteToDo(todo: todo))
         : context.read<ToDoBloc>().add(RemoveToDo(todo: todo));
@@ -39,7 +39,8 @@ class BuildList extends StatelessWidget {
       title: Text(
         todo.title,
         style: TextStyle(
-          decoration: todo.isDone ? TextDecoration.lineThrough : TextDecoration.none,
+          decoration:
+              todo.isDone ? TextDecoration.lineThrough : TextDecoration.none,
           decorationColor: Colors.deepPurpleAccent.shade700,
           decorationThickness: 3,
         ),
