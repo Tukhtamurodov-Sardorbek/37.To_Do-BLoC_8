@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/pages/home_page.dart';
+import 'package:todo_app/pages/recycle_bin.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -19,12 +21,14 @@ class CustomDrawer extends StatelessWidget {
               leading: Icon(Icons.folder_special, color: Colors.deepPurpleAccent.shade700,),
               title: const Text('Home'),
               trailing: Text('0'),
+              onTap: () => Navigator.pushNamed(context, HomePage.id),
             ),
             Divider(color: Colors.deepPurpleAccent.shade700),
             ListTile(
               leading: Icon(Icons.delete, color: Colors.deepPurpleAccent.shade700,),
               title: const Text('Bin'),
               trailing: Text('0'),
+              onTap: () => Navigator.pushNamed(context, RecycleBin.id),
             ),
           ],
         ),
