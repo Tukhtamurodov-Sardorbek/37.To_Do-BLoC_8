@@ -6,6 +6,12 @@ class ToDoList extends StatelessWidget {
   final List<ToDo> list;
   const ToDoList({Key? key, required this.list}) : super(key: key);
 
+  void _removeOrDelete(BuildContext context, ToDo todo){
+    todo.isDeleted
+        ? context.read<ToDoBloc>().add(DeleteToDo(todo: todo))
+        : context.read<ToDoBloc>().add(RemoveToDo(todo: todo));
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -15,7 +21,7 @@ class ToDoList extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final todo = list[index];
         return GestureDetector(
-          onLongPress: () => context.read<ToDoBloc>().add(DeleteToDo(todo: todo)),
+          onLongPress: () => _removeOrDelete(context, todo),
           child: BuildList(todo: todo),
         );
       },
