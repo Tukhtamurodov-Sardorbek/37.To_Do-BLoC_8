@@ -9,6 +9,7 @@ class ToDoState extends Equatable {
   @override
   List<Object> get props => [todoList];
 
+  // * For Hydrated Storage
   Map<String, dynamic> toMap() => {
     'todoList' : todoList.map((e) => e.toMap()).toList(),
   };
