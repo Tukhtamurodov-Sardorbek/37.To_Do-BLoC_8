@@ -4,8 +4,8 @@ import 'package:todo_app/models/todo_model.dart';
 import 'package:todo_app/services/color_service.dart';
 
 class ToDoList extends StatelessWidget {
-  final List<ToDo> list;
-  const ToDoList({Key? key, required this.list}) : super(key: key);
+  final int pageIndex;
+  const ToDoList({Key? key, required this.pageIndex}) : super(key: key);
 
   void _removeOrDelete(BuildContext context, ToDo todo) {
     todo.isDeleted
@@ -15,18 +15,29 @@ class ToDoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 70.0),
-      itemCount: list.length,
-      itemBuilder: (BuildContext context, int index) {
-        final todo = list[index];
-        return GestureDetector(
-          onLongPress: () => _removeOrDelete(context, todo),
-          child: BuildList(todo: todo),
-        );
-      },
-    );
+    return BlocBuilder<ToDoBloc, ToDoState>(builder: (context, state) {
+      final list = pageIndex == 0
+          ? state.pendingList
+          : pageIndex == 1
+              ? state.completedList
+              : pageIndex == 2
+                  ? state.favoriteList
+                  : state.deletedList;
+
+      print('Index: $pageIndex');
+      return ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 70.0),
+        itemCount: list.length,
+        itemBuilder: (BuildContext context, int index) {
+          final todo = list[index];
+          return GestureDetector(
+            onLongPress: () => _removeOrDelete(context, todo),
+            child: BuildList(todo: todo),
+          );
+        },
+      );
+    });
   }
 }
 
