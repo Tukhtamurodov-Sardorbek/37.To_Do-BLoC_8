@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/pages/home_page.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todo_app/services/router.dart';
+import 'package:todo_app/services/theme.dart';
 
 import 'bloc/bloc_exports.dart';
 
@@ -30,12 +31,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ToDoBloc()),
         BlocProvider(create: (context) => ThemeBloc()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'TODO APP',
-        onGenerateRoute: appRouter.onGenerate,
-        home: const HomePage(),
-      ),
+      child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'TODO APP',
+          theme: state.nightMode
+              ? Themes.appThemeData[AppTheme.darkTheme]
+              : Themes.appThemeData[AppTheme.lightTheme],
+          onGenerateRoute: appRouter.onGenerate,
+          home: const HomePage(),
+        );
+      }),
     );
   }
 }
