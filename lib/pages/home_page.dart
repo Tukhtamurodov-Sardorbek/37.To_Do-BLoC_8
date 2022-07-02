@@ -33,9 +33,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocBuilder<ToDoBloc, ToDoState>(
       builder: (context, state) {
-        final pending = state.pendingList.length;
-        final completed = state.completedList.length;
-        final favorite = state.favoriteList.length;
+        final pending = state.pendingList.length >= 999 ? '999+' : state.pendingList.length;
+        final completed = state.completedList.length >= 999 ? '999+' : state.completedList.length;
+        final favorite = state.favoriteList.length >= 999 ? '999+' : state.favoriteList.length;
 
         return Scaffold(
           drawer: const CustomDrawer(),
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               Chip(
                 label: FittedBox(
                   child: Text(
-                    '${pending >= 999 ? '999+' : pending}  Pending  |  ${completed >= 999 ? '999+' : completed}  Completed  |  ${favorite >= 999 ? '999+' : favorite}  Favorite',
+                    '$pending  Pending  |  $completed  Completed  |  $favorite  Favorite',
                     style: const TextStyle(
                       color: ColorService.white,
                       fontWeight: FontWeight.bold,
@@ -81,35 +81,35 @@ class _HomePageState extends State<HomePage> {
               fontWeight: FontWeight.bold,
               fontSize: 14,
             ),
-            unselectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-            ),
+            unselectedLabelStyle:
+                const TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
             onTap: (index) {
-              print('$_selectedPageIndex -> $index');
               setState(() {
                 _selectedPageIndex = index;
               });
             },
             items: const [
               BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: EdgeInsets.only(bottom: 2.0),
-                    child: Icon(Icons.incomplete_circle_sharp),
-                  ),
-                  label: 'Pending Tasks'),
+                icon: Padding(
+                  padding: EdgeInsets.only(bottom: 2.0),
+                  child: Icon(Icons.incomplete_circle_sharp),
+                ),
+                label: 'Pending Tasks',
+              ),
               BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: EdgeInsets.only(bottom: 2.0),
-                    child: Icon(Icons.done),
-                  ),
-                  label: 'Completed Tasks'),
+                icon: Padding(
+                  padding: EdgeInsets.only(bottom: 2.0),
+                  child: Icon(Icons.done),
+                ),
+                label: 'Completed Tasks',
+              ),
               BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: EdgeInsets.only(bottom: 2.0),
-                    child: Icon(Icons.favorite),
-                  ),
-                  label: 'Favorite Tasks'),
+                icon: Padding(
+                  padding: EdgeInsets.only(bottom: 2.0),
+                  child: Icon(Icons.favorite),
+                ),
+                label: 'Favorite Tasks',
+              ),
             ],
           ),
         );
