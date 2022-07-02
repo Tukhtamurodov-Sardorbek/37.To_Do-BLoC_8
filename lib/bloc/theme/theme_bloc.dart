@@ -5,19 +5,15 @@ part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc() : super(const ThemeInitial(nightMode: false)) {
-    on<DarkThemeEvent>(
-        (event, emit) {
-          emit(
-            const ThemeState(nightMode: true),
-          );
-        }
-    );
-    on<LightThemeEvent>(
-        (event, emit) {
-          emit(
-            const ThemeState(nightMode: false),
-          );
-        }
-    );
+    on<DarkThemeEvent>((event, emit) {
+      emit(
+        const ThemeState(nightMode: true),
+      );
+    });
+    on<LightThemeEvent>((event, emit) {
+      emit(
+        const ThemeState(nightMode: false),
+      );
+    });
   }
 }
