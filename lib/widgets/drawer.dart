@@ -15,13 +15,13 @@ class CustomDrawer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              color: Colors.deepPurpleAccent.shade700,
+              color: ColorService.main,
               padding:
                   const EdgeInsets.symmetric(vertical: 15.5, horizontal: 20.0),
               child: const Text(
                 'Todo Drawer',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: ColorService.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 22,
                 ),
@@ -33,7 +33,7 @@ class CustomDrawer extends StatelessWidget {
                 return ListTile(
                   leading: Icon(
                     Icons.folder_special,
-                    color: Colors.deepPurpleAccent.shade700,
+                    color: ColorService.main,
                   ),
                   title: const Text(
                     'Home',
@@ -67,13 +67,13 @@ class CustomDrawer extends StatelessWidget {
                 );
               },
             ),
-            Divider(color: Colors.deepPurpleAccent.shade700),
+            Divider(color: ColorService.main),
             BlocBuilder<ToDoBloc, ToDoState>(
               builder: (context, state) {
                 return ListTile(
                   leading: Icon(
                     Icons.delete,
-                    color: Colors.deepPurpleAccent.shade700,
+                    color: ColorService.main,
                   ),
                   title: const Text(
                     'Bin',
@@ -107,13 +107,13 @@ class CustomDrawer extends StatelessWidget {
                 );
               },
             ),
-            Divider(color: Colors.deepPurpleAccent.shade700),
+            Divider(color: ColorService.main),
             BlocBuilder<ToDoBloc, ToDoState>(
               builder: (context, state) {
                 return ListTile(
                   leading: Icon(
                     Icons.nights_stay,
-                    color: Colors.deepPurpleAccent.shade700,
+                    color: ColorService.main,
                   ),
                   title: const Text(
                     'Night Mode',
