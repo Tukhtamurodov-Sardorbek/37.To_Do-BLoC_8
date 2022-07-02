@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/models/todo_model.dart';
+import 'package:todo_app/services/color_service.dart';
 import 'package:todo_app/widgets/bottomSheet.dart';
 import 'package:todo_app/widgets/drawer.dart';
 import 'package:todo_app/widgets/todo_list.dart';
@@ -22,8 +23,8 @@ class HomePage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.deepPurpleAccent.shade700,
+            foregroundColor: ColorService.white,
+            backgroundColor: ColorService.main,
             title: const Text(
               'ToDo App',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -36,10 +37,11 @@ class HomePage extends StatelessWidget {
                 label: Text(
                   '${state.todoList.length} ToDos',
                   style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold,
+                    color: ColorService.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                backgroundColor: Colors.deepPurpleAccent.shade700,
+                backgroundColor: ColorService.main,
               ),
               Expanded(child: ToDoList(list: todoList)),
             ],
@@ -47,7 +49,7 @@ class HomePage extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () => _addToDo(context),
             tooltip: 'Add ToDo',
-            backgroundColor: Colors.deepPurpleAccent.shade700,
+            backgroundColor: ColorService.main,
             child: const Icon(Icons.add, size: 30),
           ),
           drawer: const CustomDrawer(),
