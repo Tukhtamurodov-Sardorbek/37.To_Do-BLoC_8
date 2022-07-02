@@ -87,7 +87,7 @@ class BuildList extends StatelessWidget {
         style: TextStyle(
           decoration:
               todo.isDone ? TextDecoration.lineThrough : TextDecoration.none,
-          decorationColor: ColorService.main,
+          // decorationColor: ColorService.main,
           decorationThickness: 3,
         ),
         maxLines: 2,
@@ -95,10 +95,10 @@ class BuildList extends StatelessWidget {
       ),
       leading: Icon(
         Icons.star_border_outlined,
-        color: ColorService.main,
+        // color: ColorService.main,
       ),
       trailing: Checkbox(
-        activeColor: ColorService.main,
+        // activeColor: ColorService.main,
         checkColor: ColorService.white,
         value: todo.isDone,
         onChanged: (value) {
