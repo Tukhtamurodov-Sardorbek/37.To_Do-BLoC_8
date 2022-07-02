@@ -6,6 +6,7 @@ import 'package:todo_app/widgets/drawer.dart';
 import 'package:todo_app/widgets/todo_list.dart';
 
 class HomePage extends StatelessWidget {
+  static const String id = '/home';
   const HomePage({Key? key}) : super(key: key);
 
   void _addToDo(BuildContext context) {
