@@ -1,4 +1,4 @@
-part of 'todo_bloc.dart';
+part of 'theme_bloc.dart';
 
 class ThemeEvent extends Equatable {
   const ThemeEvent();
