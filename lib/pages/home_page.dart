@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
-import 'package:todo_app/pages/completed_page.dart';
-import 'package:todo_app/pages/favorite_page.dart';
-import 'package:todo_app/pages/pending_page.dart';
 import 'package:todo_app/services/color_service.dart';
 import 'package:todo_app/widgets/bottomSheet.dart';
 import 'package:todo_app/widgets/drawer.dart';
+import 'package:todo_app/widgets/todo_list.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = '/tabs';
@@ -16,11 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final Map<String, Widget> _pages = {
-    'Pending Tasks': const PendingPage(),
-    'Completed Tasks': const CompletedPage(),
-    'Favorite Tasks': const FavoritePage(),
-  };
+  final List<String> _pages = [
+    'Pending Tasks',
+    'Completed Tasks',
+    'Favorite Tasks',
+  ];
 
   int _selectedPageIndex = 0;
 
@@ -44,7 +42,7 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              _pages.keys.toList()[_selectedPageIndex],
+              _pages[_selectedPageIndex],
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
@@ -64,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 backgroundColor: ColorService.main,
               ),
-              Expanded(child: _pages.values.toList()[_selectedPageIndex]),
+              Expanded(child: ToDoList(pageIndex: _selectedPageIndex)),
             ],
           ),
           floatingActionButton: _selectedPageIndex == 0
@@ -88,6 +86,7 @@ class _HomePageState extends State<HomePage> {
               fontSize: 12,
             ),
             onTap: (index) {
+              print('$_selectedPageIndex -> $index');
               setState(() {
                 _selectedPageIndex = index;
               });
