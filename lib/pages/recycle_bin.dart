@@ -18,7 +18,7 @@ class RecycleBin extends StatelessWidget {
           appBar: AppBar(
             centerTitle: true,
             foregroundColor: ColorService.white,
-            backgroundColor: ColorService.main,
+            // backgroundColor: ColorService.main,
             title: const Text(
               'Recycle Bin',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
