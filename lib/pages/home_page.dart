@@ -34,9 +34,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocBuilder<ToDoBloc, ToDoState>(
       builder: (context, state) {
-        final pending = state.pendingList.length >= 999 ? '999+' : state.pendingList.length;
-        final completed = state.completedList.length >= 999 ? '999+' : state.completedList.length;
-        final favorite = state.favoriteList.length >= 999 ? '999+' : state.favoriteList.length;
+        final pending =
+            state.pendingList.length >= 999 ? '999+' : state.pendingList.length;
+        final completed = state.completedList.length >= 999
+            ? '999+'
+            : state.completedList.length;
+        final favorite = state.favoriteList.length >= 999
+            ? '999+'
+            : state.favoriteList.length;
 
         return Scaffold(
           drawer: const CustomDrawer(),
@@ -50,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           body: Stack(
             children: [
               ListView(
-                padding: const EdgeInsets.only(bottom: 80.0, top: 40.0),
+                padding: const EdgeInsets.only(bottom: 80.0, top: 42.0),
                 physics: const BouncingScrollPhysics(),
                 children: [
                   ToDoList(pageIndex: _selectedPageIndex),
@@ -71,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  backgroundColor: ColorService.main,
+                  // backgroundColor: ColorService.main,
                 ),
               ),
             ],
@@ -85,15 +90,6 @@ class _HomePageState extends State<HomePage> {
               : null,
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedPageIndex,
-            backgroundColor: ColorService.main,
-            selectedItemColor: ColorService.white,
-            unselectedItemColor: ColorService.grey,
-            selectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-            unselectedLabelStyle:
-                const TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
             onTap: (index) {
               setState(() {
                 _selectedPageIndex = index;
