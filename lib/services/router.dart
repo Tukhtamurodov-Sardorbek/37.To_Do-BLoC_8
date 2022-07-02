@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/pages/recycle_bin.dart';
-import 'package:todo_app/pages/tabs_page.dart';
+import 'package:todo_app/pages/home_page.dart';
 
 class AppRouter {
   Route? onGenerate(RouteSettings routeSettings) {
