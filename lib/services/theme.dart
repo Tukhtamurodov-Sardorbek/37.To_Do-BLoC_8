@@ -7,7 +7,7 @@ enum AppTheme {
 }
 
 class Themes {
-  static final AppThemeData = {
+  static final appThemeData = {
     AppTheme.darkTheme: ThemeData(
       brightness: Brightness.dark,
       primarySwatch: ColorService.grey,
