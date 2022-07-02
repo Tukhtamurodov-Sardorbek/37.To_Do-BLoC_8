@@ -17,7 +17,7 @@ class ToDoList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.only(bottom: 70.0),
+      padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 70.0),
       itemCount: list.length,
       itemBuilder: (BuildContext context, int index) {
         final todo = list[index];
@@ -37,6 +37,7 @@ class BuildList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.zero,
       title: Text(
         todo.title,
         style: TextStyle(
@@ -55,7 +56,7 @@ class BuildList extends StatelessWidget {
         checkColor: ColorService.white,
         value: todo.isDone,
         onChanged: (value) {
-          if(!todo.isDeleted){
+          if (!todo.isDeleted) {
             context.read<ToDoBloc>().add(UpdateToDo(todo: todo));
           }
         },
