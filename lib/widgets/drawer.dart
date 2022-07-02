@@ -5,7 +5,7 @@ import 'package:todo_app/pages/recycle_bin.dart';
 import 'package:todo_app/services/color_service.dart';
 
 class CustomDrawer extends StatelessWidget {
-  CustomDrawer({Key? key}) : super(key: key);
+  const CustomDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
