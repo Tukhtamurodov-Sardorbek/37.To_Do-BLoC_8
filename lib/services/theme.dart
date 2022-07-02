@@ -13,18 +13,28 @@ class Themes {
       primarySwatch: ColorService.grey,
       primaryColor: ColorService.black,
       backgroundColor: ColorService.backgroundDarkTheme,
-      dividerColor: ColorService.lightBlack,
+      dividerColor: ColorService.main,
+
+
+      appBarTheme: AppBarTheme(
+        backgroundColor: ColorService.main,
+        foregroundColor: ColorService.white,
+      ),
+
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: ColorService.white,
       ),
+
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all(ColorService.white),
         ),
       ),
+
       textTheme: const TextTheme(
         subtitle1: TextStyle(color: ColorService.white),
       ),
+
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: ColorService.grey,
         selectedItemColor: Colors.black,
@@ -36,19 +46,28 @@ class Themes {
       primarySwatch: ColorService.grey,
       primaryColor: ColorService.white,
       backgroundColor: ColorService.backgroundLightTheme,
-      dividerColor: Color(0xff757575),
+      dividerColor: const Color(0xff757575),
+
+      appBarTheme: AppBarTheme(
+        backgroundColor: ColorService.main,
+        foregroundColor: ColorService.white,
+      ),
+
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: ColorService.black,
         foregroundColor: ColorService.white,
       ),
+
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all(ColorService.black),
         ),
       ),
+
       textTheme: const TextTheme(
         subtitle1: TextStyle(color: ColorService.black),
       ),
+
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: ColorService.grey,
         selectedItemColor: Colors.black,
