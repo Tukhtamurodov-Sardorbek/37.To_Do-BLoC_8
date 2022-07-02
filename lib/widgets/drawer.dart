@@ -10,30 +10,30 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Drawer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              color: ColorService.main,
-              padding:
-                  const EdgeInsets.symmetric(vertical: 15.5, horizontal: 20.0),
-              child: const Text(
-                'Todo Drawer',
-                style: TextStyle(
-                  color: ColorService.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          return Drawer(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  color: state.nightMode ? null : ColorService.main,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15.5, horizontal: 20.0),
+                  child: const Text(
+                    'Todo Drawer',
+                    style: TextStyle(
+                      color: ColorService.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            BlocBuilder<ToDoBloc, ToDoState>(
-              builder: (context, state) {
-                return ListTile(
+                ListTile(
                   leading: Icon(
                     Icons.folder_special,
-                    color: ColorService.main,
+                    color: state.nightMode ? null : ColorService.main,
                   ),
                   title: const Text(
                     'Home',
@@ -49,31 +49,30 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
-                      color: ColorService.lightGrey1,
+                      color: state.nightMode ? ColorService.main : ColorService.lightGrey1,
                     ),
-                    child: Text(
-                      state.pendingList.length <= 999
-                          ? '${state.pendingList.length}'
-                          : '999+',
-                      style: TextStyle(
-                        color: ColorService.main,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                    child: BlocBuilder<ToDoBloc, ToDoState>(
+                      builder: (context, state) {
+                        return Text(
+                          state.pendingList.length <= 999
+                              ? '${state.pendingList.length}'
+                              : '999+',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        );
+                      }
                     ),
                   ),
                   onTap: () =>
                       Navigator.pushReplacementNamed(context, HomePage.id),
-                );
-              },
-            ),
-            Divider(color: ColorService.main),
-            BlocBuilder<ToDoBloc, ToDoState>(
-              builder: (context, state) {
-                return ListTile(
+                ),
+                const Divider(),
+                ListTile(
                   leading: Icon(
                     Icons.delete,
-                    color: ColorService.main,
+                    color: state.nightMode ? null : ColorService.main,
                   ),
                   title: const Text(
                     'Bin',
@@ -89,29 +88,28 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
-                      color: ColorService.lightGrey1,
+                      color: state.nightMode ? ColorService.main : ColorService.lightGrey1,
                     ),
-                    child: Text(
-                      state.deletedList.length <= 999
-                          ? '${state.deletedList.length}'
-                          : '999+',
-                      style: TextStyle(
-                        color: ColorService.main,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                    child: BlocBuilder<ToDoBloc, ToDoState>(
+                      builder: (context, state) {
+                        return Text(
+                          state.deletedList.length <= 999
+                              ? '${state.deletedList.length}'
+                              : '999+',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        );
+                      }
                     ),
                   ),
                   onTap: () =>
                       Navigator.pushReplacementNamed(context, RecycleBin.id),
-                );
-              },
-            ),
-            Divider(color: ColorService.main),
-            BlocBuilder<ThemeBloc, ThemeState>(
-              builder: (context, state) {
-                return SwitchListTile(
-                  activeColor: ColorService.main,
+                ),
+                const Divider(),
+                SwitchListTile(
+                  activeColor: ColorService.lightMain1,
                   value: state.nightMode,
                   onChanged: (bool value) {
                     value
@@ -120,7 +118,7 @@ class CustomDrawer extends StatelessWidget {
                   },
                   secondary: Icon(
                     Icons.nights_stay,
-                    color: ColorService.main,
+                    color: state.nightMode ? null : ColorService.main,
                   ),
                   controlAffinity: ListTileControlAffinity.trailing,
                   title: const Text(
@@ -130,11 +128,11 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                );
-              },
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        }
       ),
     );
   }
