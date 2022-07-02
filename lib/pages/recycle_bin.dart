@@ -3,6 +3,7 @@ import 'package:todo_app/widgets/drawer.dart';
 import 'package:todo_app/widgets/todo_list.dart';
 
 class RecycleBin extends StatelessWidget {
+  static const String id = '/bin';
   const RecycleBin({Key? key}) : super(key: key);
 
   @override
