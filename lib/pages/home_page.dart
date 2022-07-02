@@ -25,8 +25,6 @@ class HomePage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            foregroundColor: ColorService.white,
-            backgroundColor: ColorService.main,
             title: const Text(
               'ToDo App',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
