@@ -4,12 +4,12 @@ import 'package:path_provider/path_provider.dart';
 
 import 'bloc/bloc_exports.dart';
 
-void main() async{
+void main() async {
   // * For hydrated
   WidgetsFlutterBinding.ensureInitialized();
 
   final storagePath = await HydratedStorage.build(
-      storageDirectory: await getApplicationDocumentsDirectory(),
+    storageDirectory: await getApplicationDocumentsDirectory(),
   );
   HydratedBlocOverrides.runZoned(
     () => runApp(const MyApp()),
