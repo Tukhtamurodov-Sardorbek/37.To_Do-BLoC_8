@@ -6,7 +6,7 @@ class AppRouter {
   Route? onGenerate(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case HomePage.id:
-        return MaterialPageRoute(builder: (context) => HomePage());
+        return MaterialPageRoute(builder: (context) => const HomePage());
       case RecycleBin.id:
         return MaterialPageRoute(builder: (context) => const RecycleBin());
     }
