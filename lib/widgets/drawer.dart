@@ -82,6 +82,32 @@ class CustomDrawer extends StatelessWidget {
               },
             ),
             Divider(color: Colors.deepPurpleAccent.shade700),
+            BlocBuilder<ToDoBloc, ToDoState>(
+              builder: (context, state) {
+                return ListTile(
+                  leading: Icon(
+                    Icons.nights_stay,
+                    color: Colors.deepPurpleAccent.shade700,
+                  ),
+                  title: const Text(
+                    'Night Mode',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: Text(
+                    '${state.deletedList.length}',
+                    style: TextStyle(
+                      color: ColorService.main,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  onTap: () => Navigator.pushNamed(context, RecycleBin.id),
+                );
+              },
+            ),
           ],
         ),
       ),
