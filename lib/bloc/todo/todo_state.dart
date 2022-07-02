@@ -8,6 +8,14 @@ class ToDoState extends Equatable {
 
   @override
   List<Object> get props => [todoList];
+
+  Map<String, dynamic> toMap() => {
+    'todoList' : todoList.map((e) => e.toMap()).toList(),
+  };
+
+  factory ToDoState.fromMap(Map<String, dynamic> map) => ToDoState(
+    todoList: List<ToDo>.from(map['todoList']?.map((e) => ToDo.fromMap(e))),
+  );
 }
 
 // class ToDoInitial extends ToDoState{}
