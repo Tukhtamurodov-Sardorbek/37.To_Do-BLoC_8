@@ -12,7 +12,9 @@ class HomePage extends StatelessWidget {
 
   void _addToDo(BuildContext context) {
     showModalBottomSheet(
-        context: context, builder: (context) => const BottomSheetContent());
+        context: context,
+        builder: (context) => const BottomSheetContent(),
+    );
   }
 
   @override
