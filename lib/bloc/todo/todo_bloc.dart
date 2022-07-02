@@ -38,12 +38,23 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
         ? todoList.insert(index, todo.copyWith(isDone: true))
         : todoList.insert(index, todo.copyWith(isDone: false));
 
-    emit(ToDoState(todoList: todoList));
+    emit(
+      ToDoState(
+        todoList: todoList,
+        deletedList: state.deletedList,
+      ),
+    );
   }
 
   void _deleteToDo(DeleteToDo event, Emitter<ToDoState> emit) {
     final state = this.state;
-    emit(ToDoState(todoList: List.from(state.todoList)..remove(event.todo)));
+    emit(
+      ToDoState(
+        // todoList: List.from(state.todoList)..remove(event.todo),
+        todoList: state.todoList,
+        deletedList: List.from(state.deletedList)..remove(event.todo),
+      ),
+    );
   }
 
   void _removeToDo(RemoveToDo event, Emitter<ToDoState> emit) {
