@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ColorService{
+class ColorService {
   static Color main = Colors.deepPurpleAccent.shade700;
   static Color lightMain = Colors.deepPurpleAccent;
   static const white = Colors.white;
@@ -12,5 +12,4 @@ class ColorService{
   static const Color lightBlack = Colors.black54;
   static const Color backgroundDarkTheme = Color(0xff212121);
   static const Color backgroundLightTheme = Color(0xffe5e5e5);
-
 }
