@@ -32,7 +32,15 @@ class HomePage extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Chip(label: Text('${state.todoList.length} ToDos')),
+              Chip(
+                label: Text(
+                  '${state.todoList.length} ToDos',
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold,
+                  ),
+                ),
+                backgroundColor: Colors.deepPurpleAccent.shade700,
+              ),
               Expanded(child: ToDoList(list: todoList)),
             ],
           ),
