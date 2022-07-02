@@ -67,11 +67,13 @@ class _HomePageState extends State<HomePage> {
               Expanded(child: _pages.values.toList()[_selectedPageIndex]),
             ],
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => _addToDo(context),
-            tooltip: 'Add ToDo',
-            child: const Icon(Icons.add, size: 30),
-          ),
+          floatingActionButton: _selectedPageIndex == 0
+              ? FloatingActionButton(
+                  onPressed: () => _addToDo(context),
+                  tooltip: 'Add ToDo',
+                  child: const Icon(Icons.add, size: 30),
+                )
+              : null,
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedPageIndex,
             backgroundColor: ColorService.main,
@@ -94,7 +96,7 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: EdgeInsets.only(bottom: 2.0),
-                    child: Icon(Icons.list),
+                    child: Icon(Icons.incomplete_circle_sharp),
                   ),
                   label: 'Pending Tasks'),
               BottomNavigationBarItem(
