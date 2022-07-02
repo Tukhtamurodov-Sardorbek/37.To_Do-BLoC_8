@@ -17,7 +17,7 @@ class CustomDrawer extends StatelessWidget {
             Container(
               color: Colors.deepPurpleAccent.shade700,
               padding:
-                  const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
+                  const EdgeInsets.symmetric(vertical: 15.5, horizontal: 20.0),
               child: const Text(
                 'Todo Drawer',
                 style: TextStyle(
@@ -42,15 +42,28 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  trailing: Text(
-                    '${state.todoList.length}',
-                    style: TextStyle(
-                      color: ColorService.main,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                  trailing: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14.0,
+                      vertical: 8.0,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: ColorService.grey,
+                    ),
+                    child: Text(
+                      state.todoList.length >= 999
+                          ? '${state.todoList.length}'
+                          : '999+',
+                      style: TextStyle(
+                        color: ColorService.main,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
-                  onTap: () => Navigator.pushNamed(context, HomePage.id),
+                  onTap: () =>
+                      Navigator.pushReplacementNamed(context, HomePage.id),
                 );
               },
             ),
@@ -77,7 +90,8 @@ class CustomDrawer extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                  onTap: () => Navigator.pushNamed(context, RecycleBin.id),
+                  onTap: () =>
+                      Navigator.pushReplacementNamed(context, RecycleBin.id),
                 );
               },
             ),
@@ -96,15 +110,8 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  trailing: Text(
-                    '${state.deletedList.length}',
-                    style: TextStyle(
-                      color: ColorService.main,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  onTap: () => Navigator.pushNamed(context, RecycleBin.id),
+                  trailing: null,
+                  onTap: () {},
                 );
               },
             ),
