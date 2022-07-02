@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/pages/home_page.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:todo_app/pages/tabs_page.dart';
 import 'package:todo_app/services/router.dart';
 import 'package:todo_app/services/theme.dart';
 
