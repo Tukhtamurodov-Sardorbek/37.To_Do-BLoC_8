@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/pages/home_page.dart';
 import 'package:todo_app/pages/recycle_bin.dart';
+import 'package:todo_app/pages/tabs_page.dart';
 import 'package:todo_app/services/color_service.dart';
 
 class CustomDrawer extends StatelessWidget {
