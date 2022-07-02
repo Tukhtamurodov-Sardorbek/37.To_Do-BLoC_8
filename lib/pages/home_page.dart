@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/models/todo_model.dart';
+import 'package:todo_app/services/guid_gen.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class HomePage extends StatelessWidget {
                       )),
                   ElevatedButton(
                       onPressed: () {
-                        var todo = ToDo(title: titleController.text.trim());
+                        var todo = ToDo(id: GUIDGen.generate(), title: titleController.text.trim());
                         context.read<ToDoBloc>().add(AddToDo(todo: todo));
                         Navigator.pop(context);
                       },
