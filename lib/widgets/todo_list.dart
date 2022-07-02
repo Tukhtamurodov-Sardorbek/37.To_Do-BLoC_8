@@ -25,17 +25,50 @@ class ToDoList extends StatelessWidget {
                   : state.deletedList;
 
       print('Index: $pageIndex');
-      return ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 70.0),
-        itemCount: list.length,
-        itemBuilder: (BuildContext context, int index) {
-          final todo = list[index];
-          return GestureDetector(
-            onLongPress: () => _removeOrDelete(context, todo),
-            child: BuildList(todo: todo),
-          );
-        },
+      // return ListView.builder(
+      //   physics: const BouncingScrollPhysics(),
+      //   padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 70.0),
+      //   itemCount: list.length,
+      //   itemBuilder: (BuildContext context, int index) {
+      //     final todo = list[index];
+      //     return GestureDetector(
+      //       onLongPress: () => _removeOrDelete(context, todo),
+      //       child: BuildList(todo: todo),
+      //     );
+      //   },
+      // );
+      // * In order to open only one panel
+      return ExpansionPanelList.radio(
+        children: list
+            .map(
+              (todo) => ExpansionPanelRadio(
+                value: todo.id,
+                headerBuilder: (context, isOpen) => BuildList(todo: todo),
+                body: ListTile(
+                  title: SelectableText.rich(
+                      textAlign: TextAlign.start,
+                      TextSpan(children: [
+                        const TextSpan(
+                          text: 'Title\n',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(
+                          text: todo.title,
+                          style: const TextStyle(),
+                        ),
+                        const TextSpan(
+                          text: '\n\nDescription\n',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(
+                          text: todo.description,
+                          style: const TextStyle(),
+                        ),
+                      ])),
+                ),
+              ),
+            )
+            .toList(),
       );
     });
   }
@@ -57,6 +90,8 @@ class BuildList extends StatelessWidget {
           decorationColor: ColorService.main,
           decorationThickness: 3,
         ),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
       leading: Icon(
         Icons.star_border_outlined,
