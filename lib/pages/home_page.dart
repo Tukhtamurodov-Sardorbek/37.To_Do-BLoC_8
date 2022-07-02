@@ -17,9 +17,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final Map<String, Widget> _pages = {
-    'Pending Tasks' : const PendingPage(),
-    'Completed Tasks' : const CompletedPage(),
-    'Favorite Tasks' : const FavoritePage(),
+    'Pending Tasks': const PendingPage(),
+    'Completed Tasks': const CompletedPage(),
+    'Favorite Tasks': const FavoritePage(),
   };
 
   int _selectedPageIndex = 0;
@@ -35,6 +35,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocBuilder<ToDoBloc, ToDoState>(
       builder: (context, state) {
+        final pending = state.pendingList.length;
+        final completed = state.completedList.length;
+        final favorite = state.favoriteList.length;
+
         return Scaffold(
           drawer: const CustomDrawer(),
           appBar: AppBar(
@@ -44,7 +48,25 @@ class _HomePageState extends State<HomePage> {
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-          body: _pages.values.toList()[_selectedPageIndex],
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Chip(
+                label: FittedBox(
+                  child: Text(
+                    '${pending >= 999 ? '999+' : pending}  Pending  |  ${completed >= 999 ? '999+' : completed}  Completed  |  ${favorite >= 999 ? '999+' : favorite}  Favorite',
+                    style: const TextStyle(
+                      color: ColorService.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                backgroundColor: ColorService.main,
+              ),
+              Expanded(child: _pages.values.toList()[_selectedPageIndex]),
+            ],
+          ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _addToDo(context),
             tooltip: 'Add ToDo',
@@ -64,7 +86,7 @@ class _HomePageState extends State<HomePage> {
               fontSize: 12,
             ),
             onTap: (index) {
-              setState((){
+              setState(() {
                 _selectedPageIndex = index;
               });
             },
