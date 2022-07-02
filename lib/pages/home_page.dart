@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/models/todo_model.dart';
 import 'package:todo_app/widgets/bottomSheet.dart';
+import 'package:todo_app/widgets/drawer.dart';
 import 'package:todo_app/widgets/todo_list.dart';
 
 class HomePage extends StatelessWidget {
@@ -40,31 +41,7 @@ class HomePage extends StatelessWidget {
             backgroundColor: Colors.deepPurpleAccent.shade700,
             child: const Icon(Icons.add, size: 30),
           ),
-          drawer: SafeArea(
-            child: Drawer(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    color: Colors.deepPurpleAccent.shade700,
-                    padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
-                    child: Text('Todo Drawer', style: Theme.of(context).textTheme.headline5,),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.folder_special, color: Colors.deepPurpleAccent.shade700,),
-                    title: const Text('Home'),
-                    trailing: Text('0'),
-                  ),
-                  Divider(color: Colors.deepPurpleAccent.shade700),
-                  ListTile(
-                    leading: Icon(Icons.delete, color: Colors.deepPurpleAccent.shade700,),
-                    title: const Text('Bin'),
-                    trailing: Text('0'),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          drawer: const CustomDrawer(),
         );
       },
     );
