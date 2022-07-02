@@ -1,0 +1,41 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:equatable/equatable.dart';
+import '../../models/todo_model.dart';
+
+part 'todo_event.dart';
+part 'todo_state.dart';
+
+class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
+  ToDoBloc() : super(const ToDoState()) {
+    on<AddToDo>(_addToDo);
+    on<UpdateToDo>(_updateToDo);
+    on<DeleteToDo>(_deleteToDo);
+  }
+
+  void _addToDo(AddToDo event, Emitter<ToDoState> emit) {
+    final state = this.state;
+    emit(ToDoState(
+      todoList: List.from(state.todoList)..add(event.todo),
+    ));
+  }
+
+  void _updateToDo(UpdateToDo event, Emitter<ToDoState> emit) {
+    final state = this.state;
+    final todo = event.todo;
+    final index = state.todoList.indexOf(todo);
+
+
+    List<ToDo> todoList = List.from(state.todoList)..remove(todo);
+
+    todo.isDone == false
+        ? todoList.insert(index, todo.copyWith(isDone: true))
+        : todoList.insert(index, todo.copyWith(isDone: false));
+
+    emit(ToDoState(todoList: todoList));
+  }
+
+  void _deleteToDo(DeleteToDo event, Emitter<ToDoState> emit) {
+    final state = this.state;
+    emit(ToDoState(todoList: List.from(state.todoList)..remove(event.todo)));
+  }
+}
