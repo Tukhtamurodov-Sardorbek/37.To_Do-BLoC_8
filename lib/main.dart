@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/models/todo_model.dart';
 import 'package:todo_app/pages/home_page.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'bloc/bloc_exports.dart';
 
-void main() {
-  BlocOverrides.runZoned(() => runApp(const MyApp()));
+void main() async{
+  // * For hydrated
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final storagePath = await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+  HydratedBlocOverrides.runZoned(
+    () => runApp(const MyApp()),
+    storage: storagePath,
+  );
 }
 
 class MyApp extends StatelessWidget {
