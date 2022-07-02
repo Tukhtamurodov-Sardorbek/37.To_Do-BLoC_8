@@ -4,15 +4,8 @@ import 'package:todo_app/pages/home_page.dart';
 import 'package:todo_app/pages/recycle_bin.dart';
 import 'package:todo_app/services/color_service.dart';
 
-class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({Key? key}) : super(key: key);
-
-  @override
-  State<CustomDrawer> createState() => _CustomDrawerState();
-}
-
-class _CustomDrawerState extends State<CustomDrawer> {
-  bool nightMode = false;
+class CustomDrawer extends StatelessWidget {
+  CustomDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +108,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               },
             ),
             Divider(color: ColorService.main),
-            BlocBuilder<ToDoBloc, ToDoState>(
+            BlocBuilder<ThemeBloc, ThemeState>(
               builder: (context, state) {
                 return ListTile(
                   leading: Icon(
@@ -131,11 +124,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   trailing: Switch(
                     activeColor: ColorService.main,
-                    value: nightMode,
-                    onChanged: (bool value){
-                      setState((){
-                        nightMode = value;
-                      });
+                    value: state.nightMode,
+                    onChanged: (bool value) {
+                      // setState((){
+                      //   nightMode = value;
+                      // });
+                      value
+                          ? context.read<ThemeBloc>().add(DarkThemeEvent())
+                          : context.read<ThemeBloc>().add(LightThemeEvent());
                     },
                   ),
                   onTap: () {},
