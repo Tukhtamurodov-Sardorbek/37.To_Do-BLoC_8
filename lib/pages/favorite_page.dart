@@ -11,22 +11,7 @@ class FavoritePage extends StatelessWidget {
     return BlocBuilder<ToDoBloc, ToDoState>(
       builder: (context, state) {
         final todoList = state.favoriteList;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Chip(
-              label: Text(
-                '${todoList.length} ToDos',
-                style: const TextStyle(
-                  color: ColorService.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              backgroundColor: ColorService.main,
-            ),
-            Expanded(child: ToDoList(list: todoList)),
-          ],
-        );
+        return ToDoList(list: todoList);
       },
     );
   }
