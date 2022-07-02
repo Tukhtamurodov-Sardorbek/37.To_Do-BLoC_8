@@ -6,8 +6,15 @@ class ThemeState extends Equatable {
 
   @override
   List<Object> get props => [nightMode];
+
+  // * For Hydrated Storage
+  Map<String, dynamic> toMap() => {'nightMode': nightMode};
+
+  factory ThemeState.fromMap(Map<String, dynamic> map) => ThemeState(
+        nightMode: map['nightMode'] ?? false,
+      );
 }
 
-class ThemeInitial extends ThemeState{
+class ThemeInitial extends ThemeState {
   const ThemeInitial({required bool nightMode}) : super(nightMode: nightMode);
 }
