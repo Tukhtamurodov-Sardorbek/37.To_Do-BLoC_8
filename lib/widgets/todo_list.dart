@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/models/todo_model.dart';
+import 'package:todo_app/services/color_service.dart';
 
 class ToDoList extends StatelessWidget {
   final List<ToDo> list;
@@ -35,27 +36,28 @@ class BuildList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CheckboxListTile(
+    return ListTile(
       title: Text(
         todo.title,
         style: TextStyle(
           decoration:
               todo.isDone ? TextDecoration.lineThrough : TextDecoration.none,
-          decorationColor: Colors.deepPurpleAccent.shade700,
+          decorationColor: ColorService.main,
           decorationThickness: 3,
         ),
       ),
-      secondary: Icon(
+      leading: Icon(
         Icons.star_border_outlined,
-        color: Colors.deepPurpleAccent.shade700,
+        color: ColorService.main,
       ),
-      controlAffinity: ListTileControlAffinity.trailing,
-      activeColor: Colors.deepPurpleAccent.shade700,
-      checkColor: Colors.white,
-      value: todo.isDone,
-      onChanged: (value) {
-        context.read<ToDoBloc>().add(UpdateToDo(todo: todo));
-      },
+      trailing: Checkbox(
+        activeColor: ColorService.main,
+        checkColor: ColorService.white,
+        value: todo.isDone,
+        onChanged: (value) {
+          context.read<ToDoBloc>().add(UpdateToDo(todo: todo));
+        },
+      ),
     );
   }
 }
