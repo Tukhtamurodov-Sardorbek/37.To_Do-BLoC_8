@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ColorService{
   static Color main = Colors.deepPurpleAccent.shade700;
   static const white = Colors.white;
-  static Color lightGrey = Colors.grey.shade300;
+  static Color lightGrey1 = Colors.grey.shade300;
 
   // * For theme
   static const grey = Colors.grey;
