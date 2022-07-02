@@ -49,7 +49,6 @@ class HomePage extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () => _addToDo(context),
             tooltip: 'Add ToDo',
-            backgroundColor: ColorService.main,
             child: const Icon(Icons.add, size: 30),
           ),
           drawer: const CustomDrawer(),
