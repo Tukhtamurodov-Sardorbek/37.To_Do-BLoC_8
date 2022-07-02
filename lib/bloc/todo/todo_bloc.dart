@@ -23,6 +23,7 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     final state = this.state;
     emit(ToDoState(
       todoList: List.from(state.todoList)..add(event.todo),
+      deletedList: state.deletedList,
     ));
   }
 
