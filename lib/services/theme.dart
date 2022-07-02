@@ -15,7 +15,6 @@ class Themes {
       backgroundColor: ColorService.backgroundDarkTheme,
       dividerColor: ColorService.main,
 
-
       appBarTheme: AppBarTheme(
         backgroundColor: ColorService.main,
         foregroundColor: ColorService.white,
@@ -42,6 +41,7 @@ class Themes {
         unselectedItemColor: ColorService.white,
       ),
     ),
+
     AppTheme.lightTheme: ThemeData(
       brightness: Brightness.light,
       primarySwatch: ColorService.grey,
