@@ -5,6 +5,13 @@ part 'todo_event.dart';
 part 'todo_state.dart';
 
 class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
+  // * For Hydrated Storage
+  @override
+  ToDoState? fromJson(Map<String, dynamic> json) => ToDoState.fromMap(json);
+
+  @override
+  Map<String, dynamic>? toJson(ToDoState state) => state.toMap();
+
   ToDoBloc() : super(const ToDoState()) {
     on<AddToDo>(_addToDo);
     on<UpdateToDo>(_updateToDo);
@@ -37,10 +44,4 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     final state = this.state;
     emit(ToDoState(todoList: List.from(state.todoList)..remove(event.todo)));
   }
-
-  @override
-  ToDoState? fromJson(Map<String, dynamic> json) => ToDoState.fromMap(json);
-
-  @override
-  Map<String, dynamic>? toJson(ToDoState state) => state.toMap();
 }
