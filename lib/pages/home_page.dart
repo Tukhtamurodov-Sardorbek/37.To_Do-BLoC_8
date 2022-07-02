@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   void _addToDo(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) => const BottomSheetContent(),
     );
@@ -46,23 +47,33 @@ class _HomePageState extends State<HomePage> {
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          body: Stack(
             children: [
-              Chip(
-                label: FittedBox(
-                  child: Text(
-                    '$pending  Pending  |  $completed  Completed  |  $favorite  Favorite',
-                    style: const TextStyle(
-                      color: ColorService.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
+              ListView(
+                padding: const EdgeInsets.only(bottom: 80.0, top: 40.0),
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  ToDoList(pageIndex: _selectedPageIndex),
+                ],
+              ),
+              Positioned(
+                top: 0.0,
+                left: 10.0,
+                right: 10.0,
+                child: Chip(
+                  label: FittedBox(
+                    child: Text(
+                      '$pending  Pending  |  $completed  Completed  |  $favorite  Favorite',
+                      style: const TextStyle(
+                        color: ColorService.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
+                  backgroundColor: ColorService.main,
                 ),
-                backgroundColor: ColorService.main,
               ),
-              Expanded(child: ToDoList(pageIndex: _selectedPageIndex)),
             ],
           ),
           floatingActionButton: _selectedPageIndex == 0
