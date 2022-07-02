@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocBuilder<ToDoBloc, ToDoState>(
       builder: (context, state) {
-        List<ToDo> todoList = state.todoList;
         return Scaffold(
           drawer: const CustomDrawer(),
           appBar: AppBar(
