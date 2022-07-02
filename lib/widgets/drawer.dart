@@ -36,14 +36,18 @@ class CustomDrawer extends StatelessWidget {
               },
             ),
             Divider(color: Colors.deepPurpleAccent.shade700),
-            ListTile(
-              leading: Icon(
-                Icons.delete,
-                color: Colors.deepPurpleAccent.shade700,
-              ),
-              title: const Text('Bin'),
-              trailing: Text('0'),
-              onTap: () => Navigator.pushNamed(context, RecycleBin.id),
+            BlocBuilder<ToDoBloc, ToDoState>(
+              builder: (context, state) {
+                return ListTile(
+                  leading: Icon(
+                    Icons.delete,
+                    color: Colors.deepPurpleAccent.shade700,
+                  ),
+                  title: const Text('Bin'),
+                  trailing: Text('${state.deletedList.length}'),
+                  onTap: () => Navigator.pushNamed(context, RecycleBin.id),
+                );
+              }
             ),
           ],
         ),
