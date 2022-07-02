@@ -17,9 +17,14 @@ class CustomDrawer extends StatelessWidget {
               color: Colors.deepPurpleAccent.shade700,
               padding:
                   const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
-              child: Text(
+              child: const Text(
                 'Todo Drawer',
-                style: Theme.of(context).textTheme.headline5,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
             BlocBuilder<ToDoBloc, ToDoState>(
