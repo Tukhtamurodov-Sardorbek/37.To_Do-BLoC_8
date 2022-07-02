@@ -21,8 +21,9 @@ class Themes {
         foregroundColor: ColorService.white,
       ),
 
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: ColorService.white,
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: ColorService.lightMain,
+        foregroundColor: ColorService.white,
       ),
 
       textButtonTheme: TextButtonThemeData(
@@ -53,8 +54,8 @@ class Themes {
         foregroundColor: ColorService.white,
       ),
 
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: ColorService.black,
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: ColorService.main,
         foregroundColor: ColorService.white,
       ),
 
