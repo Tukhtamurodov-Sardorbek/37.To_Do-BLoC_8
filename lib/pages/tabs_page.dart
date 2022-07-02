@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/models/todo_model.dart';
+import 'package:todo_app/pages/completed_page.dart';
+import 'package:todo_app/pages/favorite_page.dart';
+import 'package:todo_app/pages/pending_page.dart';
 import 'package:todo_app/services/color_service.dart';
 import 'package:todo_app/widgets/bottomSheet.dart';
 import 'package:todo_app/widgets/drawer.dart';
@@ -8,7 +11,15 @@ import 'package:todo_app/widgets/todo_list.dart';
 
 class HomePage extends StatelessWidget {
   static const String id = '/tabs';
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
+  final List<Map<String, dynamic>> _pageDetails = [
+    {'page': const PendingPage(), 'title': 'Pending Tasks'},
+    {'page': const CompletedPage(), 'title': 'Completed Tasks'},
+    {'page': const FavoritePage(), 'title': 'Favorite Tasks'},
+  ];
+
+  int _selectedPageIndex = 0;
 
   void _addToDo(BuildContext context) {
     showModalBottomSheet(
@@ -26,25 +37,17 @@ class HomePage extends StatelessWidget {
           drawer: const CustomDrawer(),
           appBar: AppBar(
             centerTitle: true,
-            title: const Text(
-              'Tabs',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            title: Text(
+              _pageDetails[_selectedPageIndex]['title'],
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Chip(
-                label: Text(
-                  '${state.todoList.length} ToDos',
-                  style: const TextStyle(
-                    color: ColorService.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                backgroundColor: ColorService.main,
-              ),
-              Expanded(child: ToDoList(list: todoList)),
+          body: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: const [
+              PendingPage(),
+              CompletedPage(),
+              FavoritePage(),
             ],
           ),
           floatingActionButton: FloatingActionButton(
