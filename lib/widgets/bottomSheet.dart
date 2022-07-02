@@ -25,7 +25,8 @@ class BottomSheetContent extends StatelessWidget {
             style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: ColorService.main),
+                // color: ColorService.main,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 10.0),
@@ -36,15 +37,15 @@ class BottomSheetContent extends StatelessWidget {
             decoration: InputDecoration(
               label: Text(
                 'Title',
-                style: TextStyle(color: ColorService.main),
+                // style: TextStyle(color: ColorService.main),
               ),
-              focusColor: ColorService.main,
+              // focusColor: ColorService.main,
               border: const OutlineInputBorder(),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: ColorService.main, width: 5.0),
+                // borderSide: BorderSide(color: ColorService.main, width: 5.0),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: ColorService.main, width: 3.0),
+                // borderSide: BorderSide(color: ColorService.main, width: 3.0),
               ),
             ),
           ),
@@ -57,15 +58,15 @@ class BottomSheetContent extends StatelessWidget {
             decoration: InputDecoration(
               label: Text(
                 'Description',
-                style: TextStyle(color: ColorService.main),
+                // style: TextStyle(color: ColorService.main),
               ),
-              focusColor: ColorService.main,
+              // focusColor: ColorService.main,
               border: const OutlineInputBorder(),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: ColorService.main, width: 5.0),
+                // borderSide: BorderSide(color: ColorService.main, width: 5.0),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: ColorService.main, width: 3.0),
+                // borderSide: BorderSide(color: ColorService.main, width: 3.0),
               ),
             ),
           ),
@@ -80,7 +81,7 @@ class BottomSheetContent extends StatelessWidget {
                 child: Text(
                   'Cancel',
                   style: TextStyle(
-                    color: ColorService.main,
+                    // color: ColorService.main,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
@@ -97,7 +98,7 @@ class BottomSheetContent extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: ColorService.main,
+                  // primary: ColorService.main,
                 ),
                 child: const Text(
                   'Add',
