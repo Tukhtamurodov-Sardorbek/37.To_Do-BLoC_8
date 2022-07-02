@@ -53,8 +53,8 @@ class CustomDrawer extends StatelessWidget {
                       color: ColorService.lightGrey1,
                     ),
                     child: Text(
-                      state.todoList.length <= 999
-                          ? '${state.todoList.length}'
+                      state.pendingList.length <= 999
+                          ? '${state.pendingList.length}'
                           : '999+',
                       style: TextStyle(
                         color: ColorService.main,

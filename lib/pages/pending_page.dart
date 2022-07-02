@@ -10,13 +10,13 @@ class PendingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ToDoBloc, ToDoState>(
       builder: (context, state) {
-        final todoList = state.todoList;
+        final todoList = state.pendingList;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Chip(
               label: Text(
-                '${state.todoList.length} ToDos',
+                '${todoList.length} ToDos',
                 style: const TextStyle(
                   color: ColorService.white,
                   fontWeight: FontWeight.bold,
