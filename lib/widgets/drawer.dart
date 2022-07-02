@@ -49,7 +49,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
-                      color: ColorService.grey,
+                      color: ColorService.lightGrey1,
                     ),
                     child: Text(
                       state.todoList.length <= 999
@@ -89,7 +89,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
-                      color: ColorService.grey,
+                      color: ColorService.lightGrey1,
                     ),
                     child: Text(
                       state.deletedList.length <= 999
@@ -110,11 +110,19 @@ class CustomDrawer extends StatelessWidget {
             Divider(color: ColorService.main),
             BlocBuilder<ThemeBloc, ThemeState>(
               builder: (context, state) {
-                return ListTile(
-                  leading: Icon(
+                return SwitchListTile(
+                  activeColor: ColorService.main,
+                  value: state.nightMode,
+                  onChanged: (bool value) {
+                    value
+                        ? context.read<ThemeBloc>().add(DarkThemeEvent())
+                        : context.read<ThemeBloc>().add(LightThemeEvent());
+                  },
+                  secondary: Icon(
                     Icons.nights_stay,
                     color: ColorService.main,
                   ),
+                  controlAffinity: ListTileControlAffinity.trailing,
                   title: const Text(
                     'Night Mode',
                     style: TextStyle(
@@ -122,19 +130,6 @@ class CustomDrawer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  trailing: Switch(
-                    activeColor: ColorService.main,
-                    value: state.nightMode,
-                    onChanged: (bool value) {
-                      // setState((){
-                      //   nightMode = value;
-                      // });
-                      value
-                          ? context.read<ThemeBloc>().add(DarkThemeEvent())
-                          : context.read<ThemeBloc>().add(LightThemeEvent());
-                    },
-                  ),
-                  onTap: () {},
                 );
               },
             ),
