@@ -55,7 +55,9 @@ class BuildList extends StatelessWidget {
         checkColor: ColorService.white,
         value: todo.isDone,
         onChanged: (value) {
-          context.read<ToDoBloc>().add(UpdateToDo(todo: todo));
+          if(!todo.isDeleted){
+            context.read<ToDoBloc>().add(UpdateToDo(todo: todo));
+          }
         },
       ),
     );
