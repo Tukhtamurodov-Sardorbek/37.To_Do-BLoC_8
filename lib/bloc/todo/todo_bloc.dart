@@ -31,7 +31,6 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     final todo = event.todo;
     final index = state.todoList.indexOf(todo);
 
-
     List<ToDo> todoList = List.from(state.todoList)..remove(todo);
 
     todo.isDone == false
@@ -48,6 +47,12 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
 
   void _removeToDo(RemoveToDo event, Emitter<ToDoState> emit) {
     final state = this.state;
-    emit(ToDoState(todoList: List.from(state.todoList)..remove(event.todo)));
+    emit(
+      ToDoState(
+        todoList: List.from(state.todoList)..remove(event.todo),
+        deletedList: List.from(state.deletedList)
+          ..add(event.todo.copyWith(isDeleted: true)),
+      ),
+    );
   }
 }
