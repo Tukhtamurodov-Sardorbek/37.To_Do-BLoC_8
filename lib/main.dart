@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
               ? Themes.appThemeData[AppTheme.darkTheme]
               : Themes.appThemeData[AppTheme.lightTheme],
           onGenerateRoute: appRouter.onGenerate,
-          home: const HomePage(),
+          home: HomePage(),
         );
       }),
     );
