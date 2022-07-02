@@ -21,7 +21,7 @@ class Themes {
       ),
 
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: ColorService.lightMain,
+        backgroundColor: ColorService.main,
         foregroundColor: ColorService.white,
       ),
 
