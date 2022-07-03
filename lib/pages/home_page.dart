@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
             items: [
               BottomNavigationBarItem(
                 icon: Padding(
-                  padding: EdgeInsets.only(bottom: 2.0),
+                  padding: const EdgeInsets.only(bottom: 2.0),
                   child:
                   // Icon(Icons.hourglass_bottom),
                   Lottie.asset('assets/lottie/pending.json', height: 34, fit: BoxFit.cover),
@@ -113,8 +113,9 @@ class _HomePageState extends State<HomePage> {
               ),
               BottomNavigationBarItem(
                 icon: Padding(
-                  padding: EdgeInsets.only(bottom: 2.0),
-                  child: Icon(Icons.done),
+                  padding: const EdgeInsets.only(bottom: 2.0),
+                  child: Lottie.asset('assets/lottie/completed.json', height: 34, fit: BoxFit.cover),
+                  // Icon(Icons.done),
                 ),
                 label: 'Completed Tasks',
               ),
