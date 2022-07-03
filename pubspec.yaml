@@ -23,6 +23,9 @@ dependencies:
   equatable: ^2.0.3
   path_provider: ^2.0.11
 
+  # To Form DateTime
+  intl: ^0.17.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
