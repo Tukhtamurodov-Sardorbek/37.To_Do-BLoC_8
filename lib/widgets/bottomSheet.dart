@@ -57,14 +57,16 @@ class BottomSheetContent extends StatelessWidget {
                         color: state.nightMode
                             ? ColorService.lightMain2
                             : ColorService.main,
-                        width: 3.0),
+                        width: 3.0,
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                         color: state.nightMode
                             ? ColorService.lightMain2
                             : ColorService.main,
-                        width: 4.0),
+                        width: 4.0,
+                    ),
                   ),
                 ),
               ),
@@ -127,7 +129,7 @@ class BottomSheetContent extends StatelessWidget {
                       final newTodo = ToDo(
                         id: todo == null ? GUIDGen.generate() : todo!.id,
                         isSaved: todo == null ? false : todo!.isSaved,
-                        isDone: todo == null ? false : todo!.isDone,
+                        isDone: false,
                         title: titleController.text.trim(),
                         description: descriptionController.text.trim(),
                         createdTime: DateTime.now().toString(),
