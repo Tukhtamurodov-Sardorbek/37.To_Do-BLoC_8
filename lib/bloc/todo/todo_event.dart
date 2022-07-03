@@ -42,3 +42,10 @@ class RemoveToDo extends ToDoEvent {
   @override
   List<Object> get props => [todo];
 }
+
+class MarkFavoriteOrUnfavoriteToDO extends ToDoEvent {
+  final ToDo todo;
+  const MarkFavoriteOrUnfavoriteToDO({required this.todo});
+  @override
+  List<Object> get props => [todo];
+}
