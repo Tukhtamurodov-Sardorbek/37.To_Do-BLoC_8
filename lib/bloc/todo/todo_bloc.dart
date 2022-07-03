@@ -70,7 +70,6 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     final state = this.state;
     emit(
       ToDoState(
-        // todoList: List.from(state.todoList)..remove(event.todo),
         pendingList: state.pendingList,
         completedList: state.completedList,
         savedList: state.savedList,
