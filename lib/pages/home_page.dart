@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/services/color_service.dart';
 import 'package:todo_app/widgets/bottomSheet.dart';
@@ -100,11 +101,13 @@ class _HomePageState extends State<HomePage> {
                 _selectedPageIndex = index;
               });
             },
-            items: const [
+            items: [
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.only(bottom: 2.0),
-                  child: Icon(Icons.incomplete_circle_sharp),
+                  child:
+                  // Icon(Icons.hourglass_bottom),
+                  Lottie.asset('assets/lottie/pending.json', height: 34, fit: BoxFit.cover),
                 ),
                 label: 'Pending Tasks',
               ),
