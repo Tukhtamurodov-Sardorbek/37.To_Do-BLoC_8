@@ -20,7 +20,7 @@ class CustomDrawer extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     vertical: 15.5, horizontal: 20.0),
                 child: const Text(
-                  'Todo Drawer',
+                  'Menu',
                   style: TextStyle(
                     color: ColorService.white,
                     fontWeight: FontWeight.bold,
