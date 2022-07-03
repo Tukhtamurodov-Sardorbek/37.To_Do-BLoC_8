@@ -100,6 +100,7 @@ class BuildList extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
+          subtitle: Text(DateTime.now().toString()),
           leading: Icon(
             Icons.star_border_outlined,
             color:
