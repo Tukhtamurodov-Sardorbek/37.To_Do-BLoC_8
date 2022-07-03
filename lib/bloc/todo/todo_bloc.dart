@@ -20,7 +20,7 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     on<MarkEvent>(_mark);
     on<EditEvent>(_edit);
     on<RestoreEvent>(_restore);
-    // on<DeleteAllToDo>(_deleteAll);
+    on<ClearBinEvent>(_clearBin);
   }
 
   void _create(CreateEvent event, Emitter<ToDoState> emit) {
@@ -175,6 +175,19 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
         completedList: state.completedList,
         savedList: state.savedList,
         deletedList: List.from(state.deletedList)..remove(event.todo),
+      ),
+    );
+  }
+
+  void _clearBin(ClearBinEvent event, Emitter<ToDoState> emit){
+    final state = this.state;
+
+    emit(
+      ToDoState(
+        pendingList: state.pendingList,
+        completedList: state.completedList,
+        savedList: state.savedList,
+        deletedList: List.from(state.deletedList)..clear(),
       ),
     );
   }
