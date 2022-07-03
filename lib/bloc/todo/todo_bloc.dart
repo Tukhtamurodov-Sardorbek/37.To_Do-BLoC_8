@@ -13,24 +13,27 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
   Map<String, dynamic>? toJson(ToDoState state) => state.toMap();
 
   ToDoBloc() : super(const ToDoState()) {
-    on<AddToDo>(_addToDo);
-    on<UpdateToDo>(_updateToDo);
-    on<DeleteToDo>(_deleteToDo);
-    on<RemoveToDo>(_removeToDo);
+    on<AddToDo>(_create);
+    on<UpdateToDo>(_update);
+    on<DeleteToDo>(_delete);
+    on<RemoveToDo>(_remove);
     on<MarkFavoriteOrUnfavoriteToDO>(_mark);
+    on<EditToDo>(_edit);
+    // on<RestoreToDo>(_restore);
+    // on<DeleteAllToDo>(_deleteAll);
   }
 
-  void _addToDo(AddToDo event, Emitter<ToDoState> emit) {
+  void _create(AddToDo event, Emitter<ToDoState> emit) {
     final state = this.state;
     emit(ToDoState(
       pendingList: List.from(state.pendingList)..add(event.todo),
       completedList: state.completedList,
-      favoriteList: state.favoriteList,
+      savedList: state.savedList,
       deletedList: state.deletedList,
     ));
   }
 
-  void _updateToDo(UpdateToDo event, Emitter<ToDoState> emit) {
+  void _update(UpdateToDo event, Emitter<ToDoState> emit) {
     final state = this.state;
     final todo = event.todo;
     // final index = state.todoList.indexOf(todo);
@@ -49,39 +52,42 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     } else {
       pendingList = List.from(pendingList)..remove(todo);
       completedList = List.from(completedList)
-        ..insert(0, todo.copyWith(isDone: true),);
+        ..insert(
+          0,
+          todo.copyWith(isDone: true),
+        );
     }
     emit(
       ToDoState(
         pendingList: pendingList,
         completedList: completedList,
-        favoriteList: state.favoriteList,
+        savedList: state.savedList,
         deletedList: state.deletedList,
       ),
     );
   }
 
-  void _deleteToDo(DeleteToDo event, Emitter<ToDoState> emit) {
+  void _delete(DeleteToDo event, Emitter<ToDoState> emit) {
     final state = this.state;
     emit(
       ToDoState(
         // todoList: List.from(state.todoList)..remove(event.todo),
         pendingList: state.pendingList,
         completedList: state.completedList,
-        favoriteList: state.favoriteList,
+        savedList: state.savedList,
         deletedList: List.from(state.deletedList)..remove(event.todo),
       ),
     );
   }
 
-  void _removeToDo(RemoveToDo event, Emitter<ToDoState> emit) {
+  void _remove(RemoveToDo event, Emitter<ToDoState> emit) {
     final state = this.state;
     emit(
       ToDoState(
         // todoList: List.from(state.todoList)..remove(event.todo),
         pendingList: List.from(state.pendingList)..remove(event.todo),
         completedList: List.from(state.completedList)..remove(event.todo),
-        favoriteList: List.from(state.favoriteList)..remove(event.todo),
+        savedList: List.from(state.savedList)..remove(event.todo),
         deletedList: List.from(state.deletedList)
           ..add(event.todo.copyWith(isDeleted: true)),
       ),
@@ -93,25 +99,33 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     final todo = event.todo;
     List<ToDo> pendingTodo = state.pendingList;
     List<ToDo> completedTodo = state.completedList;
-    List<ToDo> favoriteTodo = state.favoriteList;
+    List<ToDo> savedTodo = state.savedList;
     final pendingIndex = pendingTodo.indexOf(todo);
     final completedIndex = completedTodo.indexOf(todo);
 
-    if(!todo.isDone){
-      if(!todo.isSaved){
-        pendingTodo = List.from(pendingTodo)..remove(todo)..insert(pendingIndex, todo.copyWith(isSaved: true));
-        favoriteTodo.insert(0, todo.copyWith(isSaved: true));
+    if (!todo.isDone) {
+      if (!todo.isSaved) {
+        pendingTodo = List.from(pendingTodo)
+          ..remove(todo)
+          ..insert(pendingIndex, todo.copyWith(isSaved: true));
+        savedTodo.insert(0, todo.copyWith(isSaved: true));
       } else {
-        pendingTodo = List.from(pendingTodo)..remove(todo)..insert(pendingIndex, todo.copyWith(isSaved: false));
-        favoriteTodo.remove(todo);
+        pendingTodo = List.from(pendingTodo)
+          ..remove(todo)
+          ..insert(pendingIndex, todo.copyWith(isSaved: false));
+        savedTodo.remove(todo);
       }
     } else {
-      if(!todo.isSaved){
-        completedTodo = List.from(completedTodo)..remove(todo)..insert(completedIndex, todo.copyWith(isSaved: true));
-        favoriteTodo.insert(0, todo.copyWith(isSaved: true));
+      if (!todo.isSaved) {
+        completedTodo = List.from(completedTodo)
+          ..remove(todo)
+          ..insert(completedIndex, todo.copyWith(isSaved: true));
+        savedTodo.insert(0, todo.copyWith(isSaved: true));
       } else {
-        completedTodo = List.from(completedTodo)..remove(todo)..insert(completedIndex, todo.copyWith(isSaved: false));
-        favoriteTodo.remove(todo);
+        completedTodo = List.from(completedTodo)
+          ..remove(todo)
+          ..insert(completedIndex, todo.copyWith(isSaved: false));
+        savedTodo.remove(todo);
       }
     }
 
@@ -119,7 +133,29 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
       ToDoState(
         pendingList: pendingTodo,
         completedList: completedTodo,
-        favoriteList: favoriteTodo,
+        savedList: savedTodo,
+        deletedList: state.deletedList,
+      ),
+    );
+  }
+
+  void _edit(EditToDo event, Emitter<ToDoState> emit) {
+    final state = this.state;
+    List<ToDo> savedToDo = state.savedList;
+
+    if (event.oldVersion.isSaved) {
+      savedToDo
+        ..remove(event.oldVersion)
+        ..insert(0, event.newVersion);
+    }
+
+    emit(
+      ToDoState(
+        pendingList: List.from(state.pendingList)
+          ..remove(event.oldVersion)
+          ..insert(0, event.newVersion),
+        completedList: state.completedList..remove(event.oldVersion),
+        savedList: savedToDo,
         deletedList: state.deletedList,
       ),
     );
