@@ -127,6 +127,7 @@ class BottomSheetContent extends StatelessWidget {
                         id: GUIDGen.generate(),
                         title: titleController.text.trim(),
                         description: descriptionController.text.trim(),
+                        createdTime: DateTime.now().toString(),
                       );
                       context.read<ToDoBloc>().add(AddToDo(todo: todo));
                       Navigator.pop(context);
