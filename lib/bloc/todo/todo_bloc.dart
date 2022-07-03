@@ -36,32 +36,31 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
   void _update(UpdateEvent event, Emitter<ToDoState> emit) {
     final state = this.state;
     final todo = event.todo;
-    // final index = state.todoList.indexOf(todo);
 
     List<ToDo> pendingList = state.pendingList;
     List<ToDo> completedList = state.completedList;
+    List<ToDo> savedList = state.savedList;
 
-    // todo.isDone == false
-    //     ? todoList.insert(index, todo.copyWith(isDone: true))
-    //     : todoList.insert(index, todo.copyWith(isDone: false));
+    final savedIndex = savedList.indexOf(todo);
 
     if (todo.isDone) {
       completedList = List.from(pendingList)..remove(todo);
-      pendingList = List.from(completedList)
-        ..insert(0, todo.copyWith(isDone: false));
+      pendingList = List.from(completedList)..insert(0, todo.copyWith(isDone: false));
+      if(todo.isSaved){
+        savedList = List.from(savedList)..remove(todo)..insert(savedIndex, todo.copyWith(isDone: false));
+      }
     } else {
       pendingList = List.from(pendingList)..remove(todo);
-      completedList = List.from(completedList)
-        ..insert(
-          0,
-          todo.copyWith(isDone: true),
-        );
+      completedList.insert(0, todo.copyWith(isDone: true));
+      if(todo.isSaved){
+       savedList = List.from(savedList)..remove(todo)..insert(savedIndex, todo.copyWith(isDone: true));
+      }
     }
     emit(
       ToDoState(
         pendingList: pendingList,
         completedList: completedList,
-        savedList: state.savedList,
+        savedList: savedList,
         deletedList: state.deletedList,
       ),
     );
