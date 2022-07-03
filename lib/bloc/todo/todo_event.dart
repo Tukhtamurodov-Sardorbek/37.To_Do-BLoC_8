@@ -7,58 +7,69 @@ class ToDoEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AddToDo extends ToDoEvent {
+class CreateEvent extends ToDoEvent {
   final ToDo todo;
-  const AddToDo({
+  const CreateEvent({
     required this.todo,
   });
   @override
   List<Object> get props => [todo];
 }
 
-class UpdateToDo extends ToDoEvent {
+class UpdateEvent extends ToDoEvent {
   final ToDo todo;
-  const UpdateToDo({
+  const UpdateEvent({
     required this.todo,
   });
   @override
   List<Object> get props => [todo];
 }
 
-class DeleteToDo extends ToDoEvent {
+class DeleteEvent extends ToDoEvent {
   final ToDo todo;
-  const DeleteToDo({
+  const DeleteEvent({
     required this.todo,
   });
   @override
   List<Object> get props => [todo];
 }
 
-class RemoveToDo extends ToDoEvent {
+class RemoveEvent extends ToDoEvent {
   final ToDo todo;
-  const RemoveToDo({
+  const RemoveEvent({
     required this.todo,
   });
   @override
   List<Object> get props => [todo];
 }
 
-class MarkFavoriteOrUnfavoriteToDO extends ToDoEvent {
+class MarkEvent extends ToDoEvent {
   final ToDo todo;
-  const MarkFavoriteOrUnfavoriteToDO({required this.todo});
+  const MarkEvent({required this.todo});
   @override
   List<Object> get props => [todo];
 }
 
-class EditToDo extends ToDoEvent {
+class EditEvent extends ToDoEvent {
   final ToDo oldVersion;
   final ToDo newVersion;
 
-  const EditToDo({
+  const EditEvent({
     required this.oldVersion,
     required this.newVersion,
   });
 
   @override
   List<Object> get props => [oldVersion, newVersion];
+}
+
+class RestoreEvent extends ToDoEvent {
+  final ToDo todo;
+
+  const RestoreEvent({
+    required this.todo
+  });
+
+  @override
+  List<Object> get props => [todo];
 }
