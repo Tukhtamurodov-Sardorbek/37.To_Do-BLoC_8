@@ -118,9 +118,9 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: EdgeInsets.only(bottom: 2.0),
-                  child: Icon(Icons.star),
+                  child: Icon(Icons.bookmark),
                 ),
-                label: 'Favorite Tasks',
+                label: 'Saved Tasks',
               ),
             ],
           ),
