@@ -54,8 +54,8 @@ class PopUpButton extends StatelessWidget {
                     ),
                     PopupMenuItem(
                       child: ListTile(
-                        title: Text(todo.isFavorite ? 'Remove from bookmark' :  'Add to bookmark', style: TextStyle(color: state.nightMode ? ColorService.lightMain2 : ColorService.main, fontWeight: FontWeight.bold),),
-                        leading: Icon(todo.isFavorite ? Icons.bookmark_remove : Icons.bookmark_add, color: state.nightMode ? ColorService.lightMain2 : ColorService.main),
+                        title: Text(todo.isSaved ? 'Remove from bookmark' :  'Add to bookmark', style: TextStyle(color: state.nightMode ? ColorService.lightMain2 : ColorService.main, fontWeight: FontWeight.bold),),
+                        leading: Icon(todo.isSaved ? Icons.bookmark_remove : Icons.bookmark_add, color: state.nightMode ? ColorService.lightMain2 : ColorService.main),
                       ),
                       onTap: () {
                         return context.read<ToDoBloc>().add(MarkFavoriteOrUnfavoriteToDO(todo: todo));
