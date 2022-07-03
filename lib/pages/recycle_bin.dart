@@ -28,7 +28,7 @@ class RecycleBin extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Chip(label: Text('${todoList.length} ToDos')),
-              const Expanded(child: ToDoList(pageIndex: 10)),
+              const ToDoList(pageIndex: 10),
             ],
           ),
           drawer: const CustomDrawer(),
