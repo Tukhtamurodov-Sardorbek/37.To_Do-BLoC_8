@@ -20,10 +20,13 @@ class Themes {
           fontWeight: FontWeight.bold,
           fontSize: 14,
         ),
-        unselectedLabelStyle:
-            const TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+        unselectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+        ),
       ),
     ),
+
     AppTheme.lightTheme: ThemeData(
       brightness: Brightness.light,
       primarySwatch: ColorService.grey,
@@ -54,8 +57,10 @@ class Themes {
           fontWeight: FontWeight.bold,
           fontSize: 14,
         ),
-        unselectedLabelStyle:
-            const TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+        unselectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+        ),
       ),
     ),
   };
