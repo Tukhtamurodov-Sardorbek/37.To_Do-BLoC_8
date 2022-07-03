@@ -12,14 +12,14 @@ void main() async {
   // * For Hydrated Storage
   WidgetsFlutterBinding.ensureInitialized();
 
-  // #StatusBar & NavigationBar Color
+  // * StatusBar & NavigationBar Color
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: ColorService.main,
       systemNavigationBarColor: ColorService.main,
     ),
   );
-  // #Orientations
+  // * Orientations
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -46,17 +46,19 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ToDoBloc()),
         BlocProvider(create: (context) => ThemeBloc()),
       ],
-      child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'TODO APP',
-          theme: state.nightMode
-              ? Themes.appThemeData[AppTheme.darkTheme]
-              : Themes.appThemeData[AppTheme.lightTheme],
-          onGenerateRoute: appRouter.onGenerate,
-          home: const HomePage(),
-        );
-      }),
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'TODO APP',
+            theme: state.nightMode
+                ? Themes.appThemeData[AppTheme.darkTheme]
+                : Themes.appThemeData[AppTheme.lightTheme],
+            onGenerateRoute: appRouter.onGenerate,
+            home: const HomePage(),
+          );
+        },
+      ),
     );
   }
 }
