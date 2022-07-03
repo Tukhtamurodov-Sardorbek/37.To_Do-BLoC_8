@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:todo_app/pages/home_page.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:todo_app/services/color_service.dart';
 import 'package:todo_app/services/router.dart';
 import 'package:todo_app/services/theme.dart';
 
@@ -9,6 +11,19 @@ import 'bloc/bloc_exports.dart';
 void main() async {
   // * For Hydrated Storage
   WidgetsFlutterBinding.ensureInitialized();
+
+  // #StatusBar & NavigationBar Color
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: ColorService.main,
+      systemNavigationBarColor: ColorService.main,
+    ),
+  );
+  // #Orientations
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   final storagePath = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
