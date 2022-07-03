@@ -5,12 +5,13 @@ import 'package:todo_app/services/color_service.dart';
 import 'package:todo_app/services/guid_gen.dart';
 
 class BottomSheetContent extends StatelessWidget {
-  const BottomSheetContent({Key? key}) : super(key: key);
+  final ToDo? todo;
+  const BottomSheetContent({Key? key, this.todo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final titleController = TextEditingController();
-    final descriptionController = TextEditingController();
+    final titleController = TextEditingController(text: todo == null ? '' : todo!.title);
+    final descriptionController = TextEditingController(text: todo == null ? '' : todo!.description);
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         return SingleChildScrollView(
@@ -23,7 +24,7 @@ class BottomSheetContent extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Add ToDo',
+                todo == null ? 'Create' : 'Edit',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -123,13 +124,17 @@ class BottomSheetContent extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      var todo = ToDo(
-                        id: GUIDGen.generate(),
+                      final newTodo = ToDo(
+                        id: todo == null ? GUIDGen.generate() : todo!.id,
+                        isSaved: todo == null ? false : todo!.isSaved,
+                        isDone: todo == null ? false : todo!.isDone,
                         title: titleController.text.trim(),
                         description: descriptionController.text.trim(),
                         createdTime: DateTime.now().toString(),
                       );
-                      context.read<ToDoBloc>().add(AddToDo(todo: todo));
+                      todo == null
+                          ? context.read<ToDoBloc>().add(AddToDo(todo: newTodo))
+                          : context.read<ToDoBloc>().add(EditToDo(oldVersion: todo!, newVersion: newTodo,));
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
@@ -137,9 +142,9 @@ class BottomSheetContent extends StatelessWidget {
                           ? ColorService.lightMain2
                           : ColorService.main,
                     ),
-                    child: const Text(
-                      'Add',
-                      style: TextStyle(
+                    child: Text(
+                      todo == null ? 'Add' : 'Save',
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
                         color: ColorService.white,
