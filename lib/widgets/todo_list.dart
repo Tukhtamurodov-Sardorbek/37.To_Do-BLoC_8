@@ -78,12 +78,6 @@ class BuildList extends StatelessWidget {
   final ToDo todo;
   const BuildList({Key? key, required this.todo}) : super(key: key);
 
-  void _removeOrDelete(BuildContext context, ToDo todo) {
-    todo.isDeleted
-        ? context.read<ToDoBloc>().add(DeleteToDo(todo: todo))
-        : context.read<ToDoBloc>().add(RemoveToDo(todo: todo));
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
@@ -112,7 +106,7 @@ class BuildList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                Icons.star_border_outlined,
+                todo.isFavorite ? Icons.bookmark : Icons.bookmark_outline,
                 color: state.nightMode
                     ? ColorService.lightMain2
                     : ColorService.main,
@@ -134,9 +128,7 @@ class BuildList extends StatelessWidget {
                   }
                 },
               ),
-              PopUpButton(
-                  deleteFunc: () => _removeOrDelete(context, todo),
-                  isDeleted: todo.isDeleted),
+              PopUpButton(todo: todo, mark: () {}),
             ],
           ),
         );
