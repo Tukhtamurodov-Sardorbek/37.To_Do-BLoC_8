@@ -49,3 +49,16 @@ class MarkFavoriteOrUnfavoriteToDO extends ToDoEvent {
   @override
   List<Object> get props => [todo];
 }
+
+class EditToDo extends ToDoEvent {
+  final ToDo oldVersion;
+  final ToDo newVersion;
+
+  const EditToDo({
+    required this.oldVersion,
+    required this.newVersion,
+  });
+
+  @override
+  List<Object> get props => [oldVersion, newVersion];
+}
