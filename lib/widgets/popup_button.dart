@@ -2,16 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/models/todo_model.dart';
 import 'package:todo_app/services/color_service.dart';
+import 'package:todo_app/widgets/bottomSheet.dart';
 
 class PopUpButton extends StatelessWidget {
   final ToDo todo;
-  final VoidCallback mark;
 
   const PopUpButton({
     Key? key,
     required this.todo,
-    required this.mark,
   }) : super(key: key);
+
+
+  void _edit(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) => SafeArea(
+        child: BottomSheetContent(todo: todo),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +57,7 @@ class PopUpButton extends StatelessWidget {
                   return [
                     PopupMenuItem(
                       child: ListTile(
+                        onTap: () => _edit(context),
                         title: Text('Edit', style: TextStyle(color: state.nightMode ? ColorService.lightMain2 : ColorService.main, fontWeight: FontWeight.bold),),
                         leading: Icon(Icons.edit, color: state.nightMode ? ColorService.lightMain2 : ColorService.main),
                       ),
