@@ -16,7 +16,7 @@ class CustomDrawer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                color: state.nightMode ? null : ColorService.main,
+                color: ColorService.main,
                 padding: const EdgeInsets.symmetric(
                     vertical: 15.5, horizontal: 20.0),
                 child: const Text(
