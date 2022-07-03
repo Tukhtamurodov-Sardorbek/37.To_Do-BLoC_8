@@ -73,3 +73,4 @@ class RestoreEvent extends ToDoEvent {
   @override
   List<Object> get props => [todo];
 }
+class ClearBinEvent extends ToDoEvent {}
