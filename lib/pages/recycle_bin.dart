@@ -11,29 +11,52 @@ class RecycleBin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ToDoBloc, ToDoState>(
-      builder: (context, state) {
-        List<ToDo> todoList = state.deletedList;
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            foregroundColor: ColorService.white,
-            // backgroundColor: ColorService.main,
-            title: const Text(
-              'Recycle Bin',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+    return BlocBuilder<ToDoBloc, ToDoState>(builder: (context, state) {
+      List<ToDo> todoList = state.deletedList;
+      return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          foregroundColor: ColorService.white,
+          title: const Text(
+            'Recycle Bin',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+        ),
+        body: Stack(
+          children: [
+            ListView(
+              padding: const EdgeInsets.only(bottom: 80.0, top: 46.0),
+              physics: const BouncingScrollPhysics(),
+              children: const [
+                ToDoList(pageIndex: 10),
+              ],
             ),
-          ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Chip(label: Text('${todoList.length} ToDos')),
-              const ToDoList(pageIndex: 10),
-            ],
-          ),
-          drawer: const CustomDrawer(),
-        );
-      }
-    );
+            BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+              return Positioned(
+                top: 0.0,
+                left: 10.0,
+                right: 10.0,
+                child: Chip(
+                  label: FittedBox(
+                    child: Text(
+                      '${todoList.length} Deleted',
+                      style: const TextStyle(
+                        color: ColorService.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  backgroundColor: state.nightMode
+                      ? ColorService.lightMain2
+                      : ColorService.main,
+                ),
+              );
+            }),
+          ],
+        ),
+        drawer: const CustomDrawer(),
+      );
+    });
   }
 }
