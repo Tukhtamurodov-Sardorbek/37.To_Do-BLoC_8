@@ -7,7 +7,7 @@ class ToDo extends Equatable {
   final String createdTime;
   final bool isDone;
   final bool isDeleted;
-  final bool isFavorite;
+  final bool isSaved;
 
   const ToDo({
     required this.id,
@@ -16,7 +16,7 @@ class ToDo extends Equatable {
     required this.createdTime,
     this.isDeleted = false,
     this.isDone = false,
-    this.isFavorite = false,
+    this.isSaved = false,
   });
 
   ToDo copyWith({
@@ -26,7 +26,7 @@ class ToDo extends Equatable {
     String? createdTime,
     bool? isDone,
     bool? isDeleted,
-    bool? isFavorite,
+    bool? isSaved,
   }) =>
       ToDo(
         id: id ?? this.id,
@@ -35,7 +35,7 @@ class ToDo extends Equatable {
         createdTime: createdTime ?? this.createdTime,
         isDone: isDone ?? this.isDone,
         isDeleted: isDeleted ?? this.isDeleted,
-        isFavorite: isFavorite ?? this.isFavorite,
+        isSaved: isSaved ?? this.isSaved,
       );
 
   Map<String, dynamic> toMap() => {
@@ -45,7 +45,7 @@ class ToDo extends Equatable {
         'createdTime': createdTime,
         'isDone': isDone,
         'isDeleted': isDeleted,
-        'isFavorite': isFavorite,
+        'isSaved': isSaved,
       };
 
   factory ToDo.fromMap(Map<String, dynamic> map) => ToDo(
@@ -55,10 +55,10 @@ class ToDo extends Equatable {
         createdTime: map['createdTime'] ?? '',
         isDone: map['isDone'],
         isDeleted: map['isDeleted'],
-        isFavorite: map['isFavorite'],
+        isSaved: map['isSaved'],
       );
 
   @override
   List<Object?> get props =>
-      [id, title, description, createdTime, isDone, isDeleted, isFavorite];
+      [id, title, description, createdTime, isDone, isDeleted, isSaved];
 }
