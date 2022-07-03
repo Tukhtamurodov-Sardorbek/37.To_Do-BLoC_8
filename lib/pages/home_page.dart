@@ -55,30 +55,34 @@ class _HomePageState extends State<HomePage> {
           body: Stack(
             children: [
               ListView(
-                padding: const EdgeInsets.only(bottom: 80.0, top: 42.0),
+                padding: const EdgeInsets.only(bottom: 80.0, top: 46.0),
                 physics: const BouncingScrollPhysics(),
                 children: [
                   ToDoList(pageIndex: _selectedPageIndex),
                 ],
               ),
-              Positioned(
-                top: 0.0,
-                left: 10.0,
-                right: 10.0,
-                child: Chip(
-                  label: FittedBox(
-                    child: Text(
-                      '$pending  Pending  |  $completed  Completed  |  $favorite  Favorite',
-                      style: const TextStyle(
-                        color: ColorService.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
+              BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+                return Positioned(
+                  top: 0.0,
+                  left: 10.0,
+                  right: 10.0,
+                  child: Chip(
+                    label: FittedBox(
+                      child: Text(
+                        '$pending  Pending  |  $completed  Completed  |  $favorite  Favorite',
+                        style: const TextStyle(
+                          color: ColorService.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
                       ),
                     ),
+                    backgroundColor: state.nightMode
+                        ? ColorService.lightMain2
+                        : ColorService.main,
                   ),
-                  // backgroundColor: ColorService.main,
-                ),
-              ),
+                );
+              }),
             ],
           ),
           floatingActionButton: _selectedPageIndex == 0
