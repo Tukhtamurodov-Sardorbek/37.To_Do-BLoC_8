@@ -124,7 +124,7 @@ class BuildList extends StatelessWidget {
                 value: todo.isDone,
                 onChanged: (value) {
                   if (!todo.isDeleted) {
-                    context.read<ToDoBloc>().add(UpdateToDo(todo: todo));
+                    context.read<ToDoBloc>().add(UpdateEvent(todo: todo));
                   }
                 },
               ),
