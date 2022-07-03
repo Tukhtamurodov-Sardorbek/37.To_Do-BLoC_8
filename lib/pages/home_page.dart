@@ -24,9 +24,10 @@ class _HomePageState extends State<HomePage> {
 
   void _addToDo(BuildContext context) {
     showModalBottomSheet(
-      isScrollControlled: true,
       context: context,
-      builder: (context) => const BottomSheetContent(),
+      isScrollControlled: true,
+
+      builder: (BuildContext context) => const SafeArea(child: BottomSheetContent()),
     );
   }
 
