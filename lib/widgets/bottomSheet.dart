@@ -135,8 +135,8 @@ class BottomSheetContent extends StatelessWidget {
                         createdTime: DateTime.now().toString(),
                       );
                       todo == null
-                          ? context.read<ToDoBloc>().add(AddToDo(todo: newTodo))
-                          : context.read<ToDoBloc>().add(EditToDo(oldVersion: todo!, newVersion: newTodo,));
+                          ? context.read<ToDoBloc>().add(CreateEvent(todo: newTodo))
+                          : context.read<ToDoBloc>().add(EditEvent(oldVersion: todo!, newVersion: newTodo,));
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
