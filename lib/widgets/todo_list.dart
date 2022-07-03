@@ -3,16 +3,11 @@ import 'package:intl/intl.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/models/todo_model.dart';
 import 'package:todo_app/services/color_service.dart';
+import 'package:todo_app/widgets/popup_button.dart';
 
 class ToDoList extends StatelessWidget {
   final int pageIndex;
   const ToDoList({Key? key, required this.pageIndex}) : super(key: key);
-
-  void _removeOrDelete(BuildContext context, ToDo todo) {
-    todo.isDeleted
-        ? context.read<ToDoBloc>().add(DeleteToDo(todo: todo))
-        : context.read<ToDoBloc>().add(RemoveToDo(todo: todo));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,12 +78,19 @@ class BuildList extends StatelessWidget {
   final ToDo todo;
   const BuildList({Key? key, required this.todo}) : super(key: key);
 
+  void _removeOrDelete(BuildContext context, ToDo todo) {
+    todo.isDeleted
+        ? context.read<ToDoBloc>().add(DeleteToDo(todo: todo))
+        : context.read<ToDoBloc>().add(RemoveToDo(todo: todo));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         return ListTile(
           contentPadding: const EdgeInsets.only(left: 12.0),
+          minLeadingWidth: 20,
           title: Text(
             todo.title,
             style: TextStyle(
@@ -103,12 +105,18 @@ class BuildList extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           subtitle: Text(
-            DateFormat('dd-MM-yyyy    |    hh:mm:ss').format(DateTime.now()),
+            DateFormat('dd-MM-yyyy  |  hh:mm:ss').format(DateTime.now()),
           ),
-          leading: Icon(
-            Icons.star_border_outlined,
-            color:
-                state.nightMode ? ColorService.lightMain2 : ColorService.main,
+          leading: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.star_border_outlined,
+                color: state.nightMode
+                    ? ColorService.lightMain2
+                    : ColorService.main,
+              ),
+            ],
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
@@ -125,33 +133,7 @@ class BuildList extends StatelessWidget {
                   }
                 },
               ),
-              PopupMenuButton(
-                itemBuilder: ((context) {
-                  return [
-                    PopupMenuItem(
-                      child: const ListTile(
-                        title: Text('Edit'),
-                        leading: Icon(Icons.edit),
-                      ),
-                      onTap: () {},
-                    ),
-                    PopupMenuItem(
-                      child: const ListTile(
-                        title: Text('Add to bookmark'),
-                        leading: Icon(Icons.bookmark),
-                      ),
-                      onTap: () {},
-                    ),
-                    PopupMenuItem(
-                      child: const ListTile(
-                        title: Text('Delete'),
-                        leading: Icon(Icons.delete),
-                      ),
-                      onTap: () {},
-                    ),
-                  ];
-                }),
-              ),
+              PopUpButton(deleteFunc: () => _removeOrDelete(context, todo), isDeleted: todo.isDeleted),
             ],
           ),
         );
