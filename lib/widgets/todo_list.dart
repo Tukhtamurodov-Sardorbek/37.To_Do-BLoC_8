@@ -128,7 +128,7 @@ class BuildList extends StatelessWidget {
                   }
                 },
               ),
-              PopUpButton(todo: todo, mark: () {}),
+              PopUpButton(todo: todo),
             ],
           ),
         );
