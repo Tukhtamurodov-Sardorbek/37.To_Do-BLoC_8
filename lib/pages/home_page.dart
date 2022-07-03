@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   final List<String> _pages = [
     'Pending Tasks',
     'Completed Tasks',
-    'Favorite Tasks',
+    'Saved Tasks',
   ];
 
   int _selectedPageIndex = 0;
