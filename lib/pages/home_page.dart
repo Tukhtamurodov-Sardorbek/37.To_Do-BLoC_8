@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
               ),
               BottomNavigationBarItem(
                 icon: Padding(
-                  padding: const EdgeInsets.only(bottom: 2.0),
+                  padding: const EdgeInsets.only(bottom: 4.0),
                   child: Lottie.asset('assets/lottie/saved.json', height: 34, fit: BoxFit.cover, repeat: _selectedPageIndex == 2,),
                   // Icon(Icons.bookmark),
                 ),
