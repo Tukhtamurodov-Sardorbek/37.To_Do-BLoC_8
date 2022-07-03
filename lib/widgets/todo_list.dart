@@ -101,11 +101,12 @@ class BuildList extends StatelessWidget {
                   state.nightMode ? ColorService.lightMain2 : ColorService.main,
               decorationThickness: 3,
             ),
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           subtitle: Text(
-            DateFormat('dd-MM-yyyy  |  hh:mm:ss').format(DateTime.now()),
+            DateFormat('dd-MM-yyyy  |  hh:mm:ss')
+                .format(DateTime.parse(todo.createdTime)),
           ),
           leading: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +134,9 @@ class BuildList extends StatelessWidget {
                   }
                 },
               ),
-              PopUpButton(deleteFunc: () => _removeOrDelete(context, todo), isDeleted: todo.isDeleted),
+              PopUpButton(
+                  deleteFunc: () => _removeOrDelete(context, todo),
+                  isDeleted: todo.isDeleted),
             ],
           ),
         );
