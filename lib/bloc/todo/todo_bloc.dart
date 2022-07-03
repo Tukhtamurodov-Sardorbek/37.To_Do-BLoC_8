@@ -98,19 +98,19 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     final completedIndex = completedTodo.indexOf(todo);
 
     if(!todo.isDone){
-      if(!todo.isFavorite){
-        pendingTodo = List.from(pendingTodo)..remove(todo)..insert(pendingIndex, todo.copyWith(isFavorite: true));
-        favoriteTodo.insert(0, todo.copyWith(isFavorite: true));
+      if(!todo.isSaved){
+        pendingTodo = List.from(pendingTodo)..remove(todo)..insert(pendingIndex, todo.copyWith(isSaved: true));
+        favoriteTodo.insert(0, todo.copyWith(isSaved: true));
       } else {
-        pendingTodo = List.from(pendingTodo)..remove(todo)..insert(pendingIndex, todo.copyWith(isFavorite: false));
+        pendingTodo = List.from(pendingTodo)..remove(todo)..insert(pendingIndex, todo.copyWith(isSaved: false));
         favoriteTodo.remove(todo);
       }
     } else {
-      if(!todo.isFavorite){
-        completedTodo = List.from(completedTodo)..remove(todo)..insert(completedIndex, todo.copyWith(isFavorite: true));
-        favoriteTodo.insert(0, todo.copyWith(isFavorite: true));
+      if(!todo.isSaved){
+        completedTodo = List.from(completedTodo)..remove(todo)..insert(completedIndex, todo.copyWith(isSaved: true));
+        favoriteTodo.insert(0, todo.copyWith(isSaved: true));
       } else {
-        completedTodo = List.from(completedTodo)..remove(todo)..insert(completedIndex, todo.copyWith(isFavorite: false));
+        completedTodo = List.from(completedTodo)..remove(todo)..insert(completedIndex, todo.copyWith(isSaved: false));
         favoriteTodo.remove(todo);
       }
     }
