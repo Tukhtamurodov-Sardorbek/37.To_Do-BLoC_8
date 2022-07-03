@@ -105,9 +105,8 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.only(bottom: 2.0),
-                  child:
+                  child: Lottie.asset('assets/lottie/pending.json', height: 34, fit: BoxFit.cover),
                   // Icon(Icons.hourglass_bottom),
-                  Lottie.asset('assets/lottie/pending.json', height: 34, fit: BoxFit.cover),
                 ),
                 label: 'Pending Tasks',
               ),
@@ -121,8 +120,9 @@ class _HomePageState extends State<HomePage> {
               ),
               BottomNavigationBarItem(
                 icon: Padding(
-                  padding: EdgeInsets.only(bottom: 2.0),
-                  child: Icon(Icons.bookmark),
+                  padding: const EdgeInsets.only(bottom: 2.0),
+                  child: Lottie.asset('assets/lottie/saved.json', height: 34, fit: BoxFit.cover),
+                  // Icon(Icons.bookmark),
                 ),
                 label: 'Saved Tasks',
               ),
