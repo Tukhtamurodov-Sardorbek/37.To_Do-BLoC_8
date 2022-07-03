@@ -106,7 +106,7 @@ class BuildList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                todo.isFavorite ? Icons.bookmark : Icons.bookmark_outline,
+                todo.isSaved ? Icons.bookmark : Icons.bookmark_outline,
                 color: state.nightMode
                     ? ColorService.lightMain2
                     : ColorService.main,
