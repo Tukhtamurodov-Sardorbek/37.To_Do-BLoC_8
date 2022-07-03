@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/bloc/bloc_exports.dart';
 import 'package:todo_app/models/todo_model.dart';
 import 'package:todo_app/services/color_service.dart';
@@ -70,7 +71,8 @@ class ToDoList extends StatelessWidget {
                     ),
                   ),
                 ),
-              ).toList(),
+              )
+              .toList(),
         );
       });
     });
@@ -100,22 +102,57 @@ class BuildList extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          subtitle: Text(DateTime.now().toString()),
+          subtitle: Text(
+            DateFormat('dd-MM-yyyy    |    hh:mm:ss').format(DateTime.now()),
+          ),
           leading: Icon(
             Icons.star_border_outlined,
             color:
                 state.nightMode ? ColorService.lightMain2 : ColorService.main,
           ),
-          trailing: Checkbox(
-            activeColor:
-                state.nightMode ? ColorService.lightMain2 : ColorService.main,
-            checkColor: ColorService.white,
-            value: todo.isDone,
-            onChanged: (value) {
-              if (!todo.isDeleted) {
-                context.read<ToDoBloc>().add(UpdateToDo(todo: todo));
-              }
-            },
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Checkbox(
+                activeColor: state.nightMode
+                    ? ColorService.lightMain2
+                    : ColorService.main,
+                checkColor: ColorService.white,
+                value: todo.isDone,
+                onChanged: (value) {
+                  if (!todo.isDeleted) {
+                    context.read<ToDoBloc>().add(UpdateToDo(todo: todo));
+                  }
+                },
+              ),
+              PopupMenuButton(
+                itemBuilder: ((context) {
+                  return [
+                    PopupMenuItem(
+                      child: const ListTile(
+                        title: Text('Edit'),
+                        leading: Icon(Icons.edit),
+                      ),
+                      onTap: () {},
+                    ),
+                    PopupMenuItem(
+                      child: const ListTile(
+                        title: Text('Add to bookmark'),
+                        leading: Icon(Icons.bookmark),
+                      ),
+                      onTap: () {},
+                    ),
+                    PopupMenuItem(
+                      child: const ListTile(
+                        title: Text('Delete'),
+                        leading: Icon(Icons.delete),
+                      ),
+                      onTap: () {},
+                    ),
+                  ];
+                }),
+              ),
+            ],
           ),
         );
       },
