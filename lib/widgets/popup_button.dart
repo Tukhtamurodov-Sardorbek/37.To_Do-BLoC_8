@@ -14,6 +14,9 @@ class PopUpButton extends StatelessWidget {
 
 
   void _edit(BuildContext context) {
+    // * To close the popupmenu
+    Navigator.pop(context);
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -37,14 +40,16 @@ class PopUpButton extends StatelessWidget {
                   return [
                     PopupMenuItem(
                       child: ListTile(
+                        onTap: (){
+                          return context.read<ToDoBloc>().add(RestoreEvent(todo: todo));
+                        },
                         title: Text('Restore', style: TextStyle(color: ColorService.main, fontWeight: FontWeight.bold),),
                         leading: Icon(Icons.restore_from_trash, color: ColorService.green,),
                       ),
-                      onTap: () {},
                     ),
                     PopupMenuItem(
                       onTap: (){
-                        return context.read<ToDoBloc>().add(DeleteToDo(todo: todo));
+                        return context.read<ToDoBloc>().add(DeleteEvent(todo: todo));
                       },
                       child: ListTile(
                         title: Text('Delete Permanently', style: TextStyle(color: ColorService.main, fontWeight: FontWeight.bold),),
@@ -65,16 +70,16 @@ class PopUpButton extends StatelessWidget {
                     ),
                     PopupMenuItem(
                       child: ListTile(
-                        title: Text(todo.isSaved ? 'Remove from bookmark' :  'Add to bookmark', style: TextStyle(color: state.nightMode ? ColorService.lightMain2 : ColorService.main, fontWeight: FontWeight.bold),),
+                        title: Text(todo.isSaved ? 'Remove from \nbookmark' :  'Add to \nbookmark', style: TextStyle(color: state.nightMode ? ColorService.lightMain2 : ColorService.main, fontWeight: FontWeight.bold),),
                         leading: Icon(todo.isSaved ? Icons.bookmark_remove : Icons.bookmark_add, color: state.nightMode ? ColorService.lightMain2 : ColorService.main),
                       ),
                       onTap: () {
-                        return context.read<ToDoBloc>().add(MarkFavoriteOrUnfavoriteToDO(todo: todo));
+                        return context.read<ToDoBloc>().add(MarkEvent(todo: todo));
                       },
                     ),
                     PopupMenuItem(
                       onTap: (){
-                        return context.read<ToDoBloc>().add(RemoveToDo(todo: todo));
+                        return context.read<ToDoBloc>().add(RemoveEvent(todo: todo));
                       },
                       child: ListTile(
                         title: Text('Delete', style: TextStyle(color: state.nightMode ? ColorService.lightMain2 : ColorService.main, fontWeight: FontWeight.bold),),
