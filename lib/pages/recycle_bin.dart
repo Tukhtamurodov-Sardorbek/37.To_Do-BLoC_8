@@ -21,6 +21,20 @@ class RecycleBin extends StatelessWidget {
             'Recycle Bin',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  context.read<ToDoBloc>().add(ClearBinEvent());
+                },
+                child: const Text(
+                  'Clear',
+                  style: TextStyle(
+                    color: ColorService.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ))
+          ],
         ),
         body: Stack(
           children: [
