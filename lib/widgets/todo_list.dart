@@ -24,7 +24,7 @@ class ToDoList extends StatelessWidget {
                   ? state.favoriteList
                   : state.deletedList;
 
-      print('Index: $pageIndex');
+      debugPrint('Index: $pageIndex');
 
       // * In order to open only one panel
       return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
@@ -83,37 +83,41 @@ class BuildList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
-      return ListTile(
-        contentPadding: EdgeInsets.zero,
-        title: Text(
-          todo.title,
-          style: TextStyle(
-            decoration:
-                todo.isDone ? TextDecoration.lineThrough : TextDecoration.none,
-            decorationColor:
-                state.nightMode ? ColorService.lightMain2 : ColorService.main,
-            decorationThickness: 3,
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        return ListTile(
+          contentPadding: const EdgeInsets.only(left: 12.0),
+          title: Text(
+            todo.title,
+            style: TextStyle(
+              decoration: todo.isDone
+                  ? TextDecoration.lineThrough
+                  : TextDecoration.none,
+              decorationColor:
+                  state.nightMode ? ColorService.lightMain2 : ColorService.main,
+              decorationThickness: 3,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        leading: Icon(
-          Icons.star_border_outlined,
-          color: state.nightMode ? ColorService.lightMain2 : ColorService.main,
-        ),
-        trailing: Checkbox(
-          activeColor:
-              state.nightMode ? ColorService.lightMain2 : ColorService.main,
-          checkColor: ColorService.white,
-          value: todo.isDone,
-          onChanged: (value) {
-            if (!todo.isDeleted) {
-              context.read<ToDoBloc>().add(UpdateToDo(todo: todo));
-            }
-          },
-        ),
-      );
-    });
+          leading: Icon(
+            Icons.star_border_outlined,
+            color:
+                state.nightMode ? ColorService.lightMain2 : ColorService.main,
+          ),
+          trailing: Checkbox(
+            activeColor:
+                state.nightMode ? ColorService.lightMain2 : ColorService.main,
+            checkColor: ColorService.white,
+            value: todo.isDone,
+            onChanged: (value) {
+              if (!todo.isDeleted) {
+                context.read<ToDoBloc>().add(UpdateToDo(todo: todo));
+              }
+            },
+          ),
+        );
+      },
+    );
   }
 }
