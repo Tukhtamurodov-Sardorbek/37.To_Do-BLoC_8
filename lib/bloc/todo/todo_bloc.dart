@@ -17,6 +17,7 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     on<UpdateToDo>(_updateToDo);
     on<DeleteToDo>(_deleteToDo);
     on<RemoveToDo>(_removeToDo);
+    on<MarkFavoriteOrUnfavoriteToDO>(_mark);
   }
 
   void _addToDo(AddToDo event, Emitter<ToDoState> emit) {
@@ -83,6 +84,43 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
         favoriteList: List.from(state.favoriteList)..remove(event.todo),
         deletedList: List.from(state.deletedList)
           ..add(event.todo.copyWith(isDeleted: true)),
+      ),
+    );
+  }
+
+  void _mark(MarkFavoriteOrUnfavoriteToDO event, Emitter<ToDoState> emit) {
+    final state = this.state;
+    final todo = event.todo;
+    List<ToDo> pendingTodo = state.pendingList;
+    List<ToDo> completedTodo = state.completedList;
+    List<ToDo> favoriteTodo = state.favoriteList;
+    final pendingIndex = pendingTodo.indexOf(todo);
+    final completedIndex = completedTodo.indexOf(todo);
+
+    if(!todo.isDone){
+      if(!todo.isFavorite){
+        pendingTodo = List.from(pendingTodo)..remove(todo)..insert(pendingIndex, todo.copyWith(isFavorite: true));
+        favoriteTodo.insert(0, todo.copyWith(isFavorite: true));
+      } else {
+        pendingTodo = List.from(pendingTodo)..remove(todo)..insert(pendingIndex, todo.copyWith(isFavorite: false));
+        favoriteTodo.remove(todo);
+      }
+    } else {
+      if(!todo.isFavorite){
+        completedTodo = List.from(completedTodo)..remove(todo)..insert(completedIndex, todo.copyWith(isFavorite: true));
+        favoriteTodo.insert(0, todo.copyWith(isFavorite: true));
+      } else {
+        completedTodo = List.from(completedTodo)..remove(todo)..insert(completedIndex, todo.copyWith(isFavorite: false));
+        favoriteTodo.remove(todo);
+      }
+    }
+
+    emit(
+      ToDoState(
+        pendingList: pendingTodo,
+        completedList: completedTodo,
+        favoriteList: favoriteTodo,
+        deletedList: state.deletedList,
       ),
     );
   }
