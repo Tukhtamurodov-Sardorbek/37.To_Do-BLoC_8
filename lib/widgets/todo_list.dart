@@ -17,7 +17,7 @@ class ToDoList extends StatelessWidget {
           : pageIndex == 1
               ? state.completedList
               : pageIndex == 2
-                  ? state.favoriteList
+                  ? state.savedList
                   : state.deletedList;
 
       debugPrint('Index: $pageIndex');
