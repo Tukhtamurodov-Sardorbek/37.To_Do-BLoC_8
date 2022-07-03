@@ -3,12 +3,12 @@ part of 'todo_bloc.dart';
 class ToDoState extends Equatable {
   final List<ToDo> pendingList;
   final List<ToDo> completedList;
-  final List<ToDo> favoriteList;
+  final List<ToDo> savedList;
   final List<ToDo> deletedList;
   const ToDoState({
     this.pendingList = const <ToDo>[],
     this.completedList = const <ToDo>[],
-    this.favoriteList = const <ToDo>[],
+    this.savedList = const <ToDo>[],
     this.deletedList = const <ToDo>[],
   });
 
@@ -16,7 +16,7 @@ class ToDoState extends Equatable {
   List<Object> get props => [
         pendingList,
         completedList,
-        favoriteList,
+        savedList,
         deletedList,
       ];
 
@@ -24,7 +24,7 @@ class ToDoState extends Equatable {
   Map<String, dynamic> toMap() => {
         'pendingList': pendingList.map((e) => e.toMap()).toList(),
         'completedList': completedList.map((e) => e.toMap()).toList(),
-        'favoriteList': favoriteList.map((e) => e.toMap()).toList(),
+        'savedList': savedList.map((e) => e.toMap()).toList(),
         'deletedList': deletedList.map((e) => e.toMap()).toList(),
       };
 
@@ -35,8 +35,8 @@ class ToDoState extends Equatable {
         completedList: List<ToDo>.from(
           map['completedList']?.map((e) => ToDo.fromMap(e)),
         ),
-        favoriteList: List<ToDo>.from(
-          map['favoriteList']?.map((e) => ToDo.fromMap(e)),
+        savedList: List<ToDo>.from(
+          map['savedList']?.map((e) => ToDo.fromMap(e)),
         ),
         deletedList: List<ToDo>.from(
           map['deletedList']?.map((e) => ToDo.fromMap(e)),
