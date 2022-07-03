@@ -27,8 +27,9 @@ class _HomePageState extends State<HomePage> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-
-      builder: (BuildContext context) => const SafeArea(child: BottomSheetContent()),
+      builder: (BuildContext context) => const SafeArea(
+        child: BottomSheetContent(),
+      ),
     );
   }
 
@@ -41,9 +42,9 @@ class _HomePageState extends State<HomePage> {
         final completed = state.completedList.length >= 999
             ? '999+'
             : state.completedList.length;
-        final favorite = state.favoriteList.length >= 999
+        final favorite = state.savedList.length >= 999
             ? '999+'
-            : state.favoriteList.length;
+            : state.savedList.length;
 
         return Scaffold(
           drawer: const CustomDrawer(),
@@ -105,7 +106,12 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.only(bottom: 2.0),
-                  child: Lottie.asset('assets/lottie/pending.json', height: 34, fit: BoxFit.cover, repeat: _selectedPageIndex == 0,),
+                  child: Lottie.asset(
+                    'assets/lottie/pending.json',
+                    height: 34,
+                    fit: BoxFit.cover,
+                    repeat: _selectedPageIndex == 0,
+                  ),
                   // Icon(Icons.hourglass_bottom),
                 ),
                 label: 'Pending Tasks',
@@ -113,7 +119,12 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.only(bottom: 2.0),
-                  child: Lottie.asset('assets/lottie/completed.json', height: 34, fit: BoxFit.cover, repeat: _selectedPageIndex == 1,),
+                  child: Lottie.asset(
+                    'assets/lottie/completed.json',
+                    height: 34,
+                    fit: BoxFit.cover,
+                    repeat: _selectedPageIndex == 1,
+                  ),
                   // Icon(Icons.done),
                 ),
                 label: 'Completed Tasks',
@@ -121,7 +132,12 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon: Padding(
                   padding: const EdgeInsets.only(bottom: 4.0),
-                  child: Lottie.asset('assets/lottie/saved.json', height: 34, fit: BoxFit.cover, repeat: _selectedPageIndex == 2,),
+                  child: Lottie.asset(
+                    'assets/lottie/saved.json',
+                    height: 34,
+                    fit: BoxFit.cover,
+                    repeat: _selectedPageIndex == 2,
+                  ),
                   // Icon(Icons.bookmark),
                 ),
                 label: 'Saved Tasks',
