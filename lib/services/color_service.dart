@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ColorService {
@@ -7,6 +8,8 @@ class ColorService {
   static Color lightMain2 = Colors.deepPurpleAccent.shade200;
   static const white = Colors.white;
   static Color lightGrey1 = Colors.grey.shade300;
+  static Color green = CupertinoColors.systemGreen;
+  static Color red = CupertinoColors.systemRed;
 
   // * For theme
   static const grey = Colors.grey;
