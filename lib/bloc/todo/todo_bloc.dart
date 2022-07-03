@@ -45,15 +45,20 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
 
     if (todo.isDone) {
       completedList = List.from(pendingList)..remove(todo);
-      pendingList = List.from(completedList)..insert(0, todo.copyWith(isDone: false));
-      if(todo.isSaved){
-        savedList = List.from(savedList)..remove(todo)..insert(savedIndex, todo.copyWith(isDone: false));
+      pendingList = List.from(completedList)
+        ..insert(0, todo.copyWith(isDone: false));
+      if (todo.isSaved) {
+        savedList = List.from(savedList)
+          ..remove(todo)
+          ..insert(savedIndex, todo.copyWith(isDone: false));
       }
     } else {
       pendingList = List.from(pendingList)..remove(todo);
       completedList.insert(0, todo.copyWith(isDone: true));
-      if(todo.isSaved){
-       savedList = List.from(savedList)..remove(todo)..insert(savedIndex, todo.copyWith(isDone: true));
+      if (todo.isSaved) {
+        savedList = List.from(savedList)
+          ..remove(todo)
+          ..insert(savedIndex, todo.copyWith(isDone: true));
       }
     }
     emit(
@@ -82,7 +87,6 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     final state = this.state;
     emit(
       ToDoState(
-        // todoList: List.from(state.todoList)..remove(event.todo),
         pendingList: List.from(state.pendingList)..remove(event.todo),
         completedList: List.from(state.completedList)..remove(event.todo),
         savedList: List.from(state.savedList)..remove(event.todo),
@@ -177,7 +181,7 @@ class ToDoBloc extends HydratedBloc<ToDoEvent, ToDoState> {
     );
   }
 
-  void _clearBin(ClearBinEvent event, Emitter<ToDoState> emit){
+  void _clearBin(ClearBinEvent event, Emitter<ToDoState> emit) {
     final state = this.state;
 
     emit(
